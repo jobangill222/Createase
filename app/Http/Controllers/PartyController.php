@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parties;
+use App\Models\Template;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -57,6 +58,84 @@ class PartyController extends Controller
 
         }
 
+    }
+
+
+    public function createTemplate(Request $request, $party_id)
+    {
+        if ($request->isMethod('GET')) {
+            return view('parties.create_template');
+        }
+        if ($request->isMethod('POST')) {
+
+            $request->validate([
+                'background_image' => 'required|image|mimes:jpeg,png,jpg',
+                'centre_image_1' => 'required|image|mimes:jpeg,png,jpg',
+                'centre_image_2' => 'required|image|mimes:jpeg,png,jpg',
+                'state_image_1' => 'required|image|mimes:jpeg,png,jpg',
+                'state_image_2' => 'required|image|mimes:jpeg,png,jpg',
+            ]);
+
+            $data = [
+                'party_id' => $party_id,
+            ];
+
+            // Handle file upload
+            if ($request->hasFile('background_image')) {
+                $background_image = $request->file('background_image');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $background_image->getClientOriginalExtension();
+                $background_image->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+                $data['background_image'] = $imageName;
+            }
+            if ($request->hasFile('centre_image_1')) {
+                $centre_image_1 = $request->file('centre_image_1');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_1->getClientOriginalExtension();
+                $centre_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+                $data['centre_image_1'] = $imageName;
+            }
+            if ($request->hasFile('centre_image_2')) {
+                $centre_image_2 = $request->file('centre_image_2');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_2->getClientOriginalExtension();
+                $centre_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+                $data['centre_image_2'] = $imageName;
+            }
+            if ($request->hasFile('state_image_1')) {
+                $state_image_1 = $request->file('state_image_1');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_1->getClientOriginalExtension();
+                $state_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+                $data['state_image_1'] = $imageName;
+            }
+            if ($request->hasFile('state_image_2')) {
+                $state_image_2 = $request->file('state_image_2');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_2->getClientOriginalExtension();
+                $state_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+                $data['state_image_2'] = $imageName;
+            }
+
+            Template::create($data);
+
+            return redirect('parties')->with('success', 'Template created successfully.');
+
+        }
+    }
+
+
+
+    public function viewTemplate(Request $request, $party_id)
+    {
+        $data = Template::where('party_id', $party_id)->where('deleted_at', null)->orderBy('id', 'desc')->get();
+        return view('parties.party_tempaltes')->with('data', $data);
+    }
+
+    public function deleteTemplate(Request $request, $id)
+    {
+        Template::where('id', $id)->update(['deleted_at' => Date('Y-m-d h:i:s')]);
+        return back()->with('success', 'Template deleted successfully.');
     }
 
 }

@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/signin', [App\Http\Controllers\Api\AuthController::class, 'signin'])->name('signin');
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    // Routes inside this group require authentication
-    Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
-});
+// Route::group(['middleware' => 'auth:api'], function () {
+//     // Routes inside this group require authentication
+//     Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
+// });
+
+Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);

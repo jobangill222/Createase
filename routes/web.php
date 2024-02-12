@@ -41,6 +41,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/parties', [App\Http\Controllers\PartyController::class, 'index'])->name('parties');
         Route::match(['GET', 'POST'], '/parties/create', [App\Http\Controllers\PartyController::class, 'create'])->name('parties.create');
 
+        Route::match(['GET', 'POST'], '/create-template/{party_id}', [App\Http\Controllers\PartyController::class, 'createTemplate']);
+        Route::match(['GET', 'POST'], '/view-template/{party_id}', [App\Http\Controllers\PartyController::class, 'viewTemplate']);
+        Route::match(['GET', 'POST'], '/delete-template/{id}', [App\Http\Controllers\PartyController::class, 'deleteTemplate']);
+
+
+
+
         Route::get('/state', [App\Http\Controllers\StateCityController::class, 'index'])->name('state');
         Route::match(['GET', 'POST'], '/state/create', [App\Http\Controllers\StateCityController::class, 'create'])->name('state.create');
 

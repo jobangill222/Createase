@@ -6,12 +6,10 @@ use App\Components\Helper;
     <div class="side-app">
         <div class="page-header page-header-wrap">
             <div class="page-header-left">
-                <h1>{{__('All Parties')}}</h1>
+                <h1>{{__('Party Templates')}}</h1>
                 {{-- <p class="pxp-text-light">{{__('List of all users registered on website')}}</p> --}}
             </div>
-            <div class="page-header-right">
-                <a href="{{route('parties.create')}}" class="btn btn-primary">{{__('Add New Party')}}</a>
-            </div>
+         
         </div>
 
         <div class="table-wrapper">
@@ -45,12 +43,13 @@ use App\Components\Helper;
                     <thead>
                     <tr>
                         <th>{{__('S.No')}}</th>
-                        <th>{{__('Party Image')}}</th>
-                        <th>{{__('English Party Name')}}</th>
-                        <th>{{__('English Party Description')}}</th>
-                        <th>{{__('Hindi Party Name')}}</th>
-                        <th>{{__('Hindi Party Description')}}</th>
+                        <th>{{__('Background Image')}}</th>
+                        <th>{{__('Centre Image 1')}}</th>
+                        <th>{{__('Centre Image 2')}}</th>
+                        <th>{{__('State Image 1')}}</th>
+                        <th>{{__('State Image 2')}}</th>
                         <th>{{__('Action')}}</th>
+
                     </tr>
                     
                     </thead>
@@ -61,14 +60,13 @@ use App\Components\Helper;
                     @foreach($data as $item)
                     <tr>
                         <th>{{++ $i}}</th>
-                        <th> <img class="listing_image" src={{$item->party_image}}> </th>
-                        <th>{{$item->english_party_name}}</th>
-                        <th>{{$item->english_party_description}}</th>
-                        <th>{{$item->hindi_party_name}}</th>
-                        <th>{{$item->hindi_party_description}}</th>
+                        <th> <img class="listing_image" src={{$item->background_image}}> </th>
+                        <th> <img class="listing_image" src={{$item->centre_image_1}}> </th>
+                        <th> <img class="listing_image" src={{$item->centre_image_2}}> </th>
+                        <th> <img class="listing_image" src={{$item->state_image_1}}> </th>
+                        <th> <img class="listing_image" src={{$item->state_image_2}}> </th>
                         <th class="d-flex">
-                            <a href="{{url('create-template').'/'.$item->id}}" class="btn btn-primary mr-4">Add Template</button>   
-                            <a href="{{url('view-template').'/'.$item->id}}" class="btn btn-primary mr-4">View Template</button>                        
+                            <a href="{{url('delete-template').'/'.$item->id}}" class="btn btn-primary mr-4">Delete</button>   
                         </th>
                     </tr>
                     @endforeach

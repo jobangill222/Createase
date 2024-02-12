@@ -37,14 +37,17 @@ class AuthController extends Controller
         }
 
         // Generate token for the user 
-        Auth::login($user);
-        $user = Auth::user();
+        // Auth::login($user);
+        // $user = Auth::user();
+
 
         // $token = $user->createToken('admin -api-skeleton')->plainTextToken;
 
         // Return user details along with token
         return response()->json([
-            'user' => $user,
+            'status' => 'success',
+            'message' => 'Signin successfully.',
+            'data' => $user,
             // 'token' => $token,
         ]);
     }
