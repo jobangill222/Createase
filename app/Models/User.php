@@ -17,12 +17,14 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends BaseModel implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract,
-    MustVerifyEmailContract
+    MustVerifyEmailContract,
+    JWTSubject
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 
@@ -62,6 +64,18 @@ class User extends BaseModel implements
     protected $hidden = [
         'password',
         'remember_token',
+        // 'phone_number_verified_at',
+        // 'country_id',
+        // 'state_id',
+        // 'city_id',
+        // 'user_role_id',
+        'profile_pic',
+        // 'referral_code',
+        // 'referred_by',
+        // 'user_agent',
+        // 'created_ip',
+        // 'created_at',
+        // 'updated_at'
     ];
 
     /**
@@ -143,4 +157,30 @@ class User extends BaseModel implements
         }
         return false;
     }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+
+    public function userImages()
+    {
+        return $this->hasMany(UserImage::class, 'user_id');
+    }
+
+
+    public function getCurrentPartyAttribute()
+    {
+        if ($this->attributes['current_party']) {
+            // return $this->belongsTo(Parties::class);
+            return Parties::where('id', $this->attributes['current_party'])->first();
+        }
+    }
+
 }

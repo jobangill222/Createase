@@ -9,9 +9,9 @@ use App\Components\Helper;
                 <h1>{{__('All Users')}}</h1>
                 <p class="pxp-text-light">{{__('List of all users registered on website')}}</p>
             </div>
-            <div class="page-header-right">
+            {{-- <div class="page-header-right">
                 <a href="{{route('user.create')}}" class="btn btn-primary">{{__('Add New')}}</a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="table-wrapper">
@@ -25,7 +25,7 @@ use App\Components\Helper;
                                     <input type="text" name="q" value="" class="form-control filterField" placeholder="Enter Search">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            {{-- <div class="col-md-6 col-12">
                                 <div class="form-group text-left">
                                     <label for="status">{{ __('Status') }}</label>
                                     <select name="status" id="status" class="form-control filterField">
@@ -35,7 +35,7 @@ use App\Components\Helper;
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -44,13 +44,14 @@ use App\Components\Helper;
                 <table id="recordsTable" class="table table-hover align-middle" style="width:100%">
                     <thead>
                     <tr>
-                        <th>{{__('Username')}}</th>
-                        <th>{{__('Email')}}</th>
+                        {{-- <th>{{__('Username')}}</th> --}}
+                        <th>{{__('Phone Number')}}</th>
+                        {{-- <th>{{__('Email')}}</th> --}}
                         <th>{{__('Status')}}</th>
                         <th>{{__('Email Verified')}}</th>
                         <th>{{__('Created On')}}</th>
-                        <th>{{__('Updated On')}}</th>
-                        <th>{{__('Actions')}}</th>
+                        {{-- <th>{{__('Updated On')}}</th> --}}
+                        {{-- <th>{{__('Actions')}}</th> --}}
                     </tr>
                     </thead>
                 </table>
@@ -85,18 +86,19 @@ use App\Components\Helper;
                     }
                 },
                 columns: [
-                    {data: 'username', name: 'username'},
-                    {data: 'email', name: 'email'},
+                    // {data: 'username', name: 'username'},
+                    {data: 'phonenumber', name: 'phonenumber'},
+                    // {data: 'email', name: 'email'},
                     {data: 'status', name: 'status'},
                     {data: 'emailVerified', name: 'email_verified_at'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at', visible: false},
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                        orderable: true,
-                        searchable: true
-                    },
+                    // {
+                    //     data: 'actions',
+                    //     name: 'actions',
+                    //     orderable: true,
+                    //     searchable: true
+                    // },
                 ]
             });
             mainTableWrapper.find(".tableFilters").html(filters.html());

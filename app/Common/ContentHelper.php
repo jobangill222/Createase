@@ -20,7 +20,7 @@ class ContentHelper
 
     public static function getGenderOptionsHtml($genderVal = null)
     {
-        $genderVal = (string)$genderVal;
+        $genderVal = (string) $genderVal;
 
         $selectedAttr = '';
         if ($genderVal == 'null' || $genderVal == null) {
@@ -31,7 +31,7 @@ class ContentHelper
         $genders = ['male', 'female', 'other'];
         foreach ($genders as $gender) {
             $selectedAttr = '';
-            $gender = (string)$gender;
+            $gender = (string) $gender;
             if ($genderVal == $gender) {
                 $selectedAttr = 'selected';
             }
@@ -43,7 +43,7 @@ class ContentHelper
 
     public static function getYesNoHtml($activeStatus = null)
     {
-        $activeStatus = (string)$activeStatus;
+        $activeStatus = (string) $activeStatus;
 
         $selectedAttr = '';
         if ($activeStatus == 'null' || $activeStatus == null) {
@@ -52,13 +52,13 @@ class ContentHelper
         $html = '<option ' . $selectedAttr . ' value="">' . __("--Select--") . '</option>';
 
         $selectedAttr = '';
-        if ($activeStatus === (string)CommonConstants::YES) {
+        if ($activeStatus === (string) CommonConstants::YES) {
             $selectedAttr = 'selected';
         }
         $html .= '<option ' . $selectedAttr . ' value="' . CommonConstants::YES . '">' . __(ucfirst(CommonConstants::YES_STRING)) . '</option>';
 
         $selectedAttr = '';
-        if ($activeStatus === (string)CommonConstants::NO) {
+        if ($activeStatus === (string) CommonConstants::NO) {
             $selectedAttr = 'selected';
         }
         $html .= '<option ' . $selectedAttr . ' value="' . CommonConstants::NO . '">' . __(ucfirst(CommonConstants::NO_STRING)) . '</option>';
@@ -85,8 +85,8 @@ class ContentHelper
             if (is_string($daySelected)) {
                 $daySelected = explode(',', $daySelected);
                 $daySelected = Helper::cleanArray($daySelected);
-            }else{
-                if($daySelected == null){
+            } else {
+                if ($daySelected == null) {
                     $daySelected = [];
                 }
             }

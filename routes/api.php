@@ -26,5 +26,19 @@ Route::post('/signin', [App\Http\Controllers\Api\AuthController::class, 'signin'
 //     // Routes inside this group require authentication
 //     Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
 // });
+Route::group(['middleware' => ['user']], function () {
+    Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
+    Route::post('/upload-image', [App\Http\Controllers\Api\ProfileController::class, 'uploadImage']);
+    Route::post('/update-profile', [App\Http\Controllers\Api\ProfileController::class, 'updateProfile']);
 
-Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
+    Route::post('/switch-party', [App\Http\Controllers\Api\ProfileController::class, 'switchParty']);
+
+
+
+
+    Route::get('/get-party', [App\Http\Controllers\Api\UserController::class, 'getParty']);
+    Route::get('/get-template/{party_id}', [App\Http\Controllers\Api\UserController::class, 'getPartyTemplate']);
+    Route::get('/get-state', [App\Http\Controllers\Api\UserController::class, 'getState']);
+    Route::get('/get-city/{state_id}', [App\Http\Controllers\Api\UserController::class, 'getCity']);
+
+});

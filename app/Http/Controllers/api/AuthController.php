@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -37,18 +38,15 @@ class AuthController extends Controller
         }
 
         // Generate token for the user 
-        // Auth::login($user);
-        // $user = Auth::user();
-
-
-        // $token = $user->createToken('admin -api-skeleton')->plainTextToken;
+        Auth::login($user);
+        $token = JWTAuth::fromUser($user);
 
         // Return user details along with token
         return response()->json([
             'status' => 'success',
             'message' => 'Signin successfully.',
             'data' => $user,
-            // 'token' => $token,
+            'token' => $token,
         ]);
     }
 
