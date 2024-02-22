@@ -33,12 +33,21 @@ class ProfileController extends Controller
             'is_active' => $request->is_active === 'true' ? true : false
         ];
 
+
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/uploads/users', $imageName); // Store the image in the storage directory
             // Save the image path or other relevant information to the database
             $data['image'] = $imageName;
+        }
+
+
+        $users_existing_image_count = UserImage::where('user_id', $user->id)->count();
+        if ($users_existing_image_count == 3) {
+            $image = UserImage::where('user_id', $user->id)->where('is_active', '!=', 1)->first();
+            $image->delete();
         }
 
         $create = UserImage::create($data);
@@ -80,6 +89,19 @@ class ProfileController extends Controller
             'status' => 'success',
             'message' => 'Party changed successfully.',
             'data' => $user_details,
+        ]);
+    }
+
+    public function switchActiveImage(Request $request)
+    {
+        $user = Auth::user();
+
+        UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
+        UserImage::where('id', $request->image_id)->update(['is_active' => 1]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Active image change successfully.',
         ]);
     }
 

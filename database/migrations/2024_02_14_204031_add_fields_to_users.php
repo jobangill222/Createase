@@ -17,7 +17,8 @@ class AddFieldsToUsers extends Migration
             //
 
             $table->integer('current_party')->nullable();
-            $table->longText('description')->nullable();
+            $table->integer('current_party')->nullable();
+            $table->longText('designation')->nullable();
             $table->longText('state')->nullable();
             $table->longText('city')->nullable();
 

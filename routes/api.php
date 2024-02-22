@@ -27,10 +27,12 @@ Route::post('/signin', [App\Http\Controllers\Api\AuthController::class, 'signin'
 //     Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
 // });
 Route::group(['middleware' => ['user']], function () {
+
+
     Route::get('/get-profile', [App\Http\Controllers\Api\ProfileController::class, 'getProfile']);
     Route::post('/upload-image', [App\Http\Controllers\Api\ProfileController::class, 'uploadImage']);
+    Route::post('/switch-active-image', [App\Http\Controllers\Api\ProfileController::class, 'switchActiveImage']);
     Route::post('/update-profile', [App\Http\Controllers\Api\ProfileController::class, 'updateProfile']);
-
     Route::post('/switch-party', [App\Http\Controllers\Api\ProfileController::class, 'switchParty']);
 
 
@@ -40,5 +42,7 @@ Route::group(['middleware' => ['user']], function () {
     Route::get('/get-template/{party_id}', [App\Http\Controllers\Api\UserController::class, 'getPartyTemplate']);
     Route::get('/get-state', [App\Http\Controllers\Api\UserController::class, 'getState']);
     Route::get('/get-city/{state_id}', [App\Http\Controllers\Api\UserController::class, 'getCity']);
+
+    Route::post('/download-party-poster', [App\Http\Controllers\Api\UserController::class, 'downloadPartyPoster']);
 
 });

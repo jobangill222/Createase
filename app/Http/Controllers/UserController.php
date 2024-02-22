@@ -57,6 +57,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user = User::where('id', $user->id)->with('userImages')->first();
         return view('user.show', compact('user'));
     }
 
@@ -191,42 +192,32 @@ class UserController extends Controller
             $query = User::where('user_role_id', '!=', UserConstants::ROLE_ADMIN);
             //$query = User::where('user_role_id',UserConstants::ROLE_ADMIN);
             BaseModel::buildFilterQuery($query, [
-                'q' => ['username', 'email', 'phone_number'],
+                'q' => ['name', 'email', 'phone_number'],
                 'status',
                 'role' => 'user_role_id'
             ]);
 
             return Datatables::eloquent($query)
-                // ->addColumn('checkboxes', function ($row) {
-                //     return '<input type="checkbox" name="pdr_checkbox[]" class="pdr_checkbox" value="' . $row->id . '" />';
-                // })
-                // ->addColumn('username', function ($row) {
-                //     return $row->username;
-                // })
+                ->addColumn('name', function ($row) {
+                    return $row->name;
+                })
                 ->addColumn('phonenumber', function ($row) {
                     return $row->phone_number;
                 })
                 ->addColumn('created_at', function ($row) {
                     return Helper::displayTime($row->created_at);
                 })
-                // ->addColumn('updated_at', function ($row) {
-                //     return Helper::displayTime($row->updated_at);
-                // })
-                // ->addColumn('status', function ($row) {
-                //     $status = UserConstants::STATUS_PROPERTIES[$row->status];
-                //     return Helper::printBadge($status['text'], $status['class']);
-                // })
                 ->addColumn('emailVerified', function ($row) {
                     return Helper::printYesNoBadge(!($row->email_verified_at == null));
                 })
-                // ->addColumn('actions', function ($row) {
-                //     return Helper::getActionButtons([
-                //         'Login' => ['url' => route('user.loginAs', $row->id), 'icon' => 'las la-sign-in-alt'],
-                //         'view' => ['url' => route('user.show', $row->id)],
-                //         'edit' => ['url' => route('user.edit', $row->id)],
-                //         'markActive' => ['url' => route('user.markEmailVerified', $row->id), 'icon' => 'la la-check', 'visible' => ($row->email_verified_at == null)],
-                //     ]);
-                // })
+                ->addColumn('actions', function ($row) {
+                    return Helper::getActionButtons([
+                        // 'Login' => ['url' => route('user.loginAs', $row->id), 'icon' => 'las la-sign-in-alt'],
+                        'view' => ['url' => route('user.show', $row->id)],
+                        // 'edit' => ['url' => route('user.edit', $row->id)],
+                        // 'markActive' => ['url' => route('user.markEmailVerified', $row->id), 'icon' => 'la la-check', 'visible' => ($row->email_verified_at == null)],
+                    ]);
+                })
                 ->rawColumns(['checkboxes', 'actions', 'status', 'emailVerified'])
                 ->make(true);
         }

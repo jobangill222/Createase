@@ -10,6 +10,7 @@
                     <li class="breadcrumb-item active" aria-current="page">{{$user->username}}</li>
                 </ol>
             </div>
+            
             <div class="page-header-right">
                 <a href="{{route('user.index')}}" class="btn btn-primary">{{__('Go Back')}}</a>
             </div>
@@ -19,40 +20,7 @@
             <div class="media">
                 <div class="media-body">
                     <div>
-                        <label>Name</label> <span class="tx-medium">{{$user->name}}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-body">
-                    <div>
-                        <label>Username</label> <span class="tx-medium">{{$user->username}}</span>
-                    </div>
-                    <div>
-                        <label>Email</label> <span class="tx-medium">{{$user->email}}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-body">
-                    <div>
-                        <label>Status</label> <span class="tx-medium">{!! $user->statusHtml() !!}</span>
-                    </div>
-                    <div>
-                        <label>Role</label> <span class="tx-medium">{{$user->role->name}}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-body">
-                    <div>
-                        <label>Email Verified At</label> <span class="tx-medium">@datetime($user->email_verified_at)</span>
-                    </div>
-                    <div>
-                        <label>Created At</label> <span class="tx-medium">@datetime($user->created_at)</span>
-                    </div>
-                    <div>
-                        <label>Last Updated At</label> <span class="tx-medium">@datetime($user->updated_at)</span>
+                        <label>Name</label> <span class="tx-medium">{{$user->name ?? 'N/A'}}</span>
                     </div>
                 </div>
             </div>
@@ -60,15 +28,74 @@
             <div class="media">
                 <div class="media-body">
                     <div>
-                        <label>Country</label> <span class="tx-medium">{{$user->country}}</span>
-                    </div>
-                    <div>
-                        <label>State</label> <span class="tx-medium">{{$user->state}}</span>
-                    </div>
-                    <div>
-                        <label>City</label> <span class="tx-medium">{{$user->city}}</span>
+                        <label>Phone Number</label> <span class="tx-medium">{{$user->phone_number ?? 'N/A'}}</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="media">
+                <div class="media-body">
+                    <div>
+                        <label>Designtaion</label> <span class="tx-medium">{{$user->designtaion ?? 'N/A'}}</span>
+                    </div>
+                </div>
+            </div>
+           
+            
+            <div class="media">
+                <div class="media-body">
+                    <div>
+                        <label>Created At</label> <span class="tx-medium">@datetime($user->created_at ?? 'N/A')</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <?php 
+                // dd($user->userImages);
+            ?>
+            <div class="media">
+                <div class="media-body">
+                    <div>
+                        <label>Current Party</label> <span class="tx-medium">{{isset($user->current_party->english_party_name) ? $user->current_party->english_party_name : 'N/A'  }}</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="media">
+                <div class="media-body">
+                   
+                    <div>
+                        <label>State</label> <span class="tx-medium">{{$user->state ?? 'N/A'}}</span>
+                    </div>
+                    <div>
+                        <label>City</label> <span class="tx-medium">{{$user->city ?? 'N/A'}}</span>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="table-box">
+                <table id="recordsTable" class="table table-hover align-middle" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>{{__('Image')}}</th>
+                        <th>{{__('Is Active')}}</th>
+                    </tr>
+
+                    @foreach($user->userImages as $item)
+                        <tr>
+                            <td>
+                                <img class="listing_image" src={{$item->image}}>
+                            </td>
+                            <td>{{$item->is_active == 1 ? 'true' : 'false'}}</td>
+                        </tr>
+                    @endforeach
+                    </thead>
+                </table>
             </div>
 
         </div>

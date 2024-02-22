@@ -8,6 +8,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin._index');
+        // return view('admin._index');
+        return redirect('user');
     }
 }

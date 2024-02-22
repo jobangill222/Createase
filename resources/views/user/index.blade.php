@@ -44,14 +44,12 @@ use App\Components\Helper;
                 <table id="recordsTable" class="table table-hover align-middle" style="width:100%">
                     <thead>
                     <tr>
-                        {{-- <th>{{__('Username')}}</th> --}}
+                        <th>{{__('Name')}}</th>
                         <th>{{__('Phone Number')}}</th>
-                        {{-- <th>{{__('Email')}}</th> --}}
                         <th>{{__('Status')}}</th>
                         <th>{{__('Email Verified')}}</th>
                         <th>{{__('Created On')}}</th>
-                        {{-- <th>{{__('Updated On')}}</th> --}}
-                        {{-- <th>{{__('Actions')}}</th> --}}
+                        <th>{{__('Actions')}}</th>
                     </tr>
                     </thead>
                 </table>
@@ -86,19 +84,17 @@ use App\Components\Helper;
                     }
                 },
                 columns: [
-                    // {data: 'username', name: 'username'},
-                    {data: 'phonenumber', name: 'phonenumber'},
-                    // {data: 'email', name: 'email'},
+                    {data: 'name', name: 'name'},
+                    {data: 'phonenumber', name: 'phone_number'},
                     {data: 'status', name: 'status'},
                     {data: 'emailVerified', name: 'email_verified_at'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'updated_at', name: 'updated_at', visible: false},
-                    // {
-                    //     data: 'actions',
-                    //     name: 'actions',
-                    //     orderable: true,
-                    //     searchable: true
-                    // },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: true,
+                        searchable: true
+                    },
                 ]
             });
             mainTableWrapper.find(".tableFilters").html(filters.html());
