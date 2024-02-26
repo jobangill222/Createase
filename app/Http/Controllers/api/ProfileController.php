@@ -78,6 +78,8 @@ class ProfileController extends Controller
     }
 
 
+
+
     public function switchParty(Request $request)
     {
         $user = Auth::user();
