@@ -67,8 +67,10 @@ $identity=auth()->guest() ? null : auth()->user();
             <div class="container-fluid">
                 <div class="d-flex">
                     <a class="header-brand" href="{{Helper::dashboardLink()}}">
-                        <img src="{{Helper::frontendWithBaseUrl('img/logo.png')}}" class="header-brand-img main-logo" alt="{{env('APP_NAME')}}">
-                        <img src="{{Helper::frontendWithBaseUrl('img/fav.ico')}}" class="header-brand-img icon-logo" alt="{{env('APP_NAME')}}">
+                        {{-- <img src="{{Helper::frontendWithBaseUrl('img/logo.png')}}" class="header-brand-img main-logo" alt="{{env('APP_NAME')}}">
+                        <img src="{{Helper::frontendWithBaseUrl('img/fav.ico')}}" class="header-brand-img icon-logo" alt="{{env('APP_NAME')}}"> --}}
+                        <img src="{{asset('frontend/img/logo.png')}}" class="header-brand-img main-logo" alt="{{env('APP_NAME')}}">
+                        <img src="{{asset('frontend/img/fav.ico')}}" class="header-brand-img icon-logo" alt="{{env('APP_NAME')}}">
                     </a><!-- logo-->
                     <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar"
                        href="javascript:void(0);"></a>
