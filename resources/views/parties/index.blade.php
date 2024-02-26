@@ -4,6 +4,7 @@ use App\Components\Helper;
 @extends(\App\Components\Helper::getLayoutForUser())
 @section('content')
     <div class="side-app">
+
         <div class="page-header page-header-wrap">
             <div class="page-header-left">
                 <h1>{{__('All Parties')}}</h1>
@@ -13,6 +14,11 @@ use App\Components\Helper;
                 <a href="{{route('parties.create')}}" class="btn btn-primary">{{__('Add New Party')}}</a>
             </div>
         </div>
+        
+
+        <div class="card" >
+        <div class="card-body" >
+        
 
         <div class="table-wrapper">
             <div class="table-filters-ghost" style="display: none;">
@@ -78,6 +84,10 @@ use App\Components\Helper;
                 </table>
             </div>
         </div>
+
+    </div>
+</div>
+
     </div>
 @endsection
 @section('pageJs')

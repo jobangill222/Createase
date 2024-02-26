@@ -14,6 +14,10 @@ use App\Components\Helper;
             </div> --}}
         </div>
 
+
+        <div class="card" >
+        <div class="card-body">
+
         <div class="table-wrapper">
             <div class="table-filters-ghost" style="display: none;">
                 <div class="p-b-10 mt-3 searchFiltersContainer">
@@ -70,6 +74,10 @@ use App\Components\Helper;
                 </table>
             </div>
         </div>
+
+    </div>
+</div>
+
     </div>
 @endsection
 @section('pageJs')

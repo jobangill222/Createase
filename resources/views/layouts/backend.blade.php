@@ -170,9 +170,9 @@ $identity=auth()->guest() ? null : auth()->user();
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar toggle-sidebar">
             <div class="app-sidebar__user pb-0">
-                <div class="user-body">
+                {{-- <div class="user-body">
                     <span class="avatar avatar-xxl brround text-center cover-image" data-image-src="{{__($identity ? $identity->profilePic : 'assets/images/users/female/33.png')}}"></span>
-                </div>
+                </div> --}}
                 {{-- <div class="user-info">
                     <a href="{{Helper::dashboardLink()}}" class="ml-2">
                         <span class="text-dark app-sidebar__user-name font-weight-semibold">{{__($identity ? $identity->displayName : 'Guest')}}</span><br>
@@ -183,12 +183,8 @@ $identity=auth()->guest() ? null : auth()->user();
 
             <div class="tab-menu-heading siderbar-tabs border-0  p-0">
                 <div class="tabs-menu ">
-                    <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        {{-- <li class="">
-                            <a href="{{Helper::dashboardLink()}}"><i class="fa fa-home fs-17"></i></a>
-                        </li> --}}
-                        <li><a href="{{route('profile')}}"><i class="fa fa-user fs-17"></i></a></li>
+                        {{-- <li><a href="{{route('profile')}}"><i class="fa fa-user fs-17"></i></a></li> --}}
                         <li><a href="javascript:void(0);" onclick="logout();" title="logout"><i class="fa fa-power-off fs-17"></i></a></li>
                     </ul>
                 </div>

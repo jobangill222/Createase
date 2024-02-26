@@ -43,9 +43,9 @@
 
                 <div class="intro__socials">
                     <ul class="socials socials-text">
-                        <li>
+                        {{-- <li>
                             <a href="https://www.facebook.com/" target="_blank" class="link-s">Facebook</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="intro__copyright">
@@ -64,10 +64,11 @@
                             @guest
                             <a style="color: #fff !important;" href="{{route('login')}}" class="btn btn-outline-primary btn-custom text-white">
                                 Login
-                            </a> <a class="btn btn-outline-primary" style="color: #fff !important;cursor: none;" href="javascript:void(0);"> / </a>
-                            <a style="color: #fff !important;" href="{{route('register')}}" class="btn btn-outline-primary btn-custom text-white">
+                            </a> 
+                            {{-- <a class="btn btn-outline-primary" style="color: #fff !important;cursor: none;" href="javascript:void(0);"> / </a> --}}
+                            {{-- <a style="color: #fff !important;" href="{{route('register')}}" class="btn btn-outline-primary btn-custom text-white">
                                 Register
-                            </a>
+                            </a> --}}
                             @else
                                 <a style="color: #fff !important;" class="btn btn-outline-primary btn-custom text-white" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

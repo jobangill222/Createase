@@ -20,7 +20,9 @@ Route::get('/home', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('redirect');
+
 
 Route::get('/redirect', [App\Http\Controllers\ProfileController::class, 'index'])->name('redirect');
 
