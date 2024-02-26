@@ -57,9 +57,9 @@ use App\Components\Helper;
                     ?>
                     @foreach($data as $item)
                     <tr>
-                        <th>{{++ $i}}</th>
-                        <th>{{$item->english_name}}</th>
-                        <th>{{$item->hindi_name}}</th>
+                        <td>{{++ $i}}</td>
+                        <td>{{$item->english_name}}</td>
+                        <td>{{$item->hindi_name}}</td>
                         {{-- <th>
                             <a href="{{url('add-city').'/'.$item->id}}" class="btn btn-primary">Add City</button>                        
                         </th> --}}

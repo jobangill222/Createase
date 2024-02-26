@@ -46,6 +46,9 @@ use App\Components\Helper;
         <form id="validate-from" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
 
+            <div class="card" >
+
+            <div class="card-body" >
 
             <div class="row">
                 <div class="col-md-6 col-6">
@@ -86,6 +89,10 @@ use App\Components\Helper;
                     <input type="submit" value="Add" class="btn btn-primary">
                 </div>
             </div>
+
+
+        </div>
+    </div>
 
         </form>
 

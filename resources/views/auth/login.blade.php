@@ -54,16 +54,16 @@ use App\Components\Helper;
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
                                         </div>
-                                        @if (Route::has('register'))
+                                        {{-- @if (Route::has('register'))
                                         <div class="col-12">
                                             <a href="{{ route('register') }}" class="btn btn-link box-shadow-0 px-0">{{ __('Register') }}</a>
                                         </div>
-                                        @endif
-                                        @if (Route::has('password.request'))
+                                        @endif --}}
+                                        {{-- @if (Route::has('password.request'))
                                         <div class="col-12">
                                             <a href="{{ route('password.request') }}" class="btn btn-link box-shadow-0 px-0">{{ __('Forgot Your Password?') }}</a>
                                         </div>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </form>
                             </div>

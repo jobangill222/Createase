@@ -1904,7 +1904,7 @@ pre code {
 }
 .table td {
 	padding: 0.75rem;
-	vertical-align: top;
+	/* vertical-align: top; */
 }
 .border {
 	padding: 0.75rem;
@@ -24878,9 +24878,19 @@ body.search-show, body.sidebar-show {
 		margin-left:auto !important;
 	}
 }
+ 
 
-img.listing_image {
-	height: 100px;
-    width: 100px;
-    border-radius: 100px;
+.card-body img, .table-box img{
+	min-width: 100px!important;
+    max-width: 100px!important;
+    min-height: 100px!important;
+    max-height: 100px!important;
+    height: 100px!important;
+    border-radius: 50%;
+    object-fit: cover;
 }
+
+.table-box td {
+    vertical-align: middle;
+}
+ 

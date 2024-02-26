@@ -47,6 +47,10 @@ use App\Components\Helper;
             {{csrf_field()}}
 
 
+            <div class="card" >
+
+                <div class="card-body" >
+
             <div class="row">
                 <div class="col-md-6 col-6">
                     <div class="form-group required-field text-left @error('name') is-invalid @enderror">
@@ -78,14 +82,20 @@ use App\Components\Helper;
 
             </div>
 
-
-
             <div class="row mb-4">
                 <div class="col-xs-12 col-sm-12 col-md-12 formBtn">
                     {{-- <button type="submit" class="btn btn-primary">{{ __('Add') }}</button> --}}
                     <input type="submit" value="Add" class="btn btn-primary">
                 </div>
             </div>
+            
+        </div>
+    </div>
+
+
+
+
+           
 
         </form>
 

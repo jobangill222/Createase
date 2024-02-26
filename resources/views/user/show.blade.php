@@ -76,20 +76,28 @@
                 </div>
             </div>
 
-            
+            <br>
+            <br>
+            <h3>Photos</h3>
 
             <div class="table-box">
                 <table id="recordsTable" class="table table-hover align-middle" style="width:100%">
                     <thead>
                     <tr>
+                        <th>{{__('S. No')}}</th>
                         <th>{{__('Image')}}</th>
                         <th>{{__('Is Active')}}</th>
                     </tr>
 
+                    <?php 
+                        $i =0;
+                    ?>
+
                     @foreach($user->userImages as $item)
                         <tr>
-                            <td>
-                                <img class="listing_image" src={{$item->image}}>
+                            <td>{{++$i}}</td>
+                            <td >
+                                <img  src={{$item->image}}>
                             </td>
                             <td>{{$item->is_active == 1 ? 'true' : 'false'}}</td>
                         </tr>

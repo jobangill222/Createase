@@ -59,15 +59,15 @@ use App\Components\Helper;
                     ?>
                     @foreach($data as $item)
                     <tr>
-                        <th>{{++ $i}}</th>
-                        <th> <img class="listing_image" src={{$item->background_image}}> </th>
-                        <th> <img class="listing_image" src={{$item->centre_image_1}}> </th>
-                        <th> <img class="listing_image" src={{$item->centre_image_2}}> </th>
-                        <th> <img class="listing_image" src={{$item->state_image_1}}> </th>
-                        <th> <img class="listing_image" src={{$item->state_image_2}}> </th>
-                        <th class="d-flex">
+                        <td>{{++ $i}}</td>
+                        <td> <img  src={{$item->background_image}}> </td>
+                        <td> <img  src={{$item->centre_image_1}}> </td>
+                        <td> <img  src={{$item->centre_image_2}}> </td>
+                        <td> <img  src={{$item->state_image_1}}> </td>
+                        <td> <img  src={{$item->state_image_2}}> </td>
+                        <td>
                             <a href="{{url('delete-template').'/'.$item->id}}" class="btn btn-primary mr-4">Delete</button>   
-                        </th>
+                        </td>
                     </tr>
                     @endforeach
 

@@ -60,16 +60,18 @@ use App\Components\Helper;
                     ?>
                     @foreach($data as $item)
                     <tr>
-                        <th>{{++ $i}}</th>
-                        <th> <img class="listing_image" src={{$item->party_image}}> </th>
-                        <th>{{$item->english_party_name}}</th>
-                        <th>{{$item->english_party_description}}</th>
-                        <th>{{$item->hindi_party_name}}</th>
-                        <th>{{$item->hindi_party_description}}</th>
-                        <th class="d-flex">
-                            <a href="{{url('create-template').'/'.$item->id}}" class="btn btn-primary mr-4">Add Template</button>   
-                            <a href="{{url('view-template').'/'.$item->id}}" class="btn btn-primary mr-4">View Template</button>                        
-                        </th>
+                        <td>{{++ $i}}</td>
+                        <td> <img  src={{$item->party_image}}> </td>
+                        <td>{{$item->english_party_name}}</td>
+                        <td>{{$item->english_party_description}}</td>
+                        <td>{{$item->hindi_party_name}}</td>
+                        <td>{{$item->hindi_party_description}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="{{url('create-template').'/'.$item->id}}" class="btn btn-primary mr-4">Add Template</a>   
+                                <a href="{{url('view-template').'/'.$item->id}}" class="btn btn-primary mr-4">View Template</a>                        
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
 
