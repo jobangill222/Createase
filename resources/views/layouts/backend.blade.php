@@ -6,7 +6,7 @@ $identity=auth()->guest() ? null : auth()->user();
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <base href="{{Helper::withAppUrl('backend/')}}">
+    <base href="{{asset('backend')}}/">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
