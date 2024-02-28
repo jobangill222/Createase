@@ -15,9 +15,13 @@ class UpdateUsersTable extends \App\Base\Database\MigrationBase
     {
         $this->schema->table('users', function (\App\Base\Database\BlueprintBase $table) {
             $table->string('username')->unique()->after('name')->nullable();
-            $table->foreignId('country_id')->default(\App\Constants\CommonConstants::DEFAULT_COUNTRY)->after('password')->references('id')->on('countries')->onDelete('cascade');
-            $table->foreignId('state_id')->default(\App\Constants\CommonConstants::DEFAULT_STATE)->after('country_id')->references('id')->on('states')->onDelete('cascade');
-            $table->foreignId('city_id')->default(\App\Constants\CommonConstants::DEFAULT_CITY)->after('state_id')->references('id')->on('cities')->onDelete('cascade');
+            // $table->foreignId('country_id')->default(\App\Constants\CommonConstants::DEFAULT_COUNTRY)->after('password')->references('id')->on('countries')->onDelete('cascade');
+            // $table->foreignId('state_id')->default(\App\Constants\CommonConstants::DEFAULT_STATE)->after('country_id')->references('id')->on('states')->onDelete('cascade');
+            // $table->foreignId('city_id')->default(\App\Constants\CommonConstants::DEFAULT_CITY)->after('state_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->string('country_id')->after('password')->nullable();
+            $table->string('state_id')->after('country_id')->nullable();
+            $table->string('city_id')->after('state_id')->nullable();
+
             $table->foreignId('user_role_id')->default(\App\Constants\CommonConstants::DEFAULT_USER_ROLE)->after('city_id')->references('id')->on('user_roles')->onDelete('cascade');
             $table->string('status')->default(\App\Constants\UserConstants::STATUS_ACTIVE)->after('user_role_id');
             $table->string('profile_pic')->nullable()->after('status');

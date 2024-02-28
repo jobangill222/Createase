@@ -69,7 +69,6 @@ class User extends BaseModel implements
         // 'state_id',
         // 'city_id',
         // 'user_role_id',
-        'profile_pic',
         // 'referral_code',
         // 'referred_by',
         // 'user_agent',
@@ -93,12 +92,20 @@ class User extends BaseModel implements
         return Helper::printBadge($status['text'], $status['class']);
     }
 
-    public function getProfilePicAttribute($bgColor = '')
+    // public function getProfilePicAttribute($bgColor = '')
+    // {
+    //     if ($bgColor == null) {
+    //         $bgColor = 'C7002B';
+    //     }
+    //     return 'https://ui-avatars.com/api/?size=450&background=' . $bgColor . '&color=fff&name=' . urlencode($this->display_name);
+    // }
+    public function getProfilePicAttribute()
     {
-        if ($bgColor == null) {
-            $bgColor = 'C7002B';
+        if ($this->attributes['profile_pic']) {
+
+            return asset('/storage/uploads/users/' . $this->attributes['profile_pic']);
         }
-        return 'https://ui-avatars.com/api/?size=450&background=' . $bgColor . '&color=fff&name=' . urlencode($this->display_name);
+        return null;
     }
 
     public function getDisplayNameAttribute()

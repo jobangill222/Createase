@@ -7,6 +7,7 @@ use App\Models\DownloadPoster;
 use App\Models\Parties;
 use App\Models\PartyCity;
 use App\Models\PartyState;
+use App\Models\State;
 use App\Models\Template;
 use Auth;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class UserController extends Controller
 
     public function getState(Request $request)
     {
-        $data = PartyState::orderBy('english_name', 'asc')->get();
+        $data = State::orderBy('english_name', 'asc')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'State get successfully.',
@@ -27,7 +28,7 @@ class UserController extends Controller
 
     public function getCity(Request $request, $state_id)
     {
-        $data = PartyCity::where('party_state_id', $state_id)->orderBy('english_name', 'asc')->get();
+        $data = City::where('party_state_id', $state_id)->orderBy('english_name', 'asc')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'City get successfully.',

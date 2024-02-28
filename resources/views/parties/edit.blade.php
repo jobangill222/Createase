@@ -64,8 +64,10 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        <img id="imagePreview" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                        {{-- <img id="imagePreview" src="#" alt="Image Preview"
+                                            style="display: none; max-width: 100%; margin-top: 10px;"> --}}
+                                        <img id="imagePreview" src="{{ $party_details->party_image }}" alt="Image Preview"
+                                            style="max-width: 100%; margin-top: 10px; {{ isset($party_details->party_image) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +80,7 @@ use App\Components\Helper;
                                     <input id="english_party_name" type="text"
                                         class="form-control @error('english_party_name') is-invalid @enderror"
                                         name="english_party_name" placeholder="{{ __('Enter Party Name In English') }}"
-                                        value="{{ old('english_party_name') }}">
+                                        value="{{ $party_details->english_party_name ?? 'N/A/' }}">
                                     @error('english_party_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -93,7 +95,7 @@ use App\Components\Helper;
                                     <input id="party_name" type="text"
                                         class="form-control @error('hindi_party_name') is-invalid @enderror"
                                         name="hindi_party_name" placeholder="{{ __('Enter Party Name In Hindi') }}"
-                                        value="{{ old('hindi_party_name') }}">
+                                        value="{{ $party_details->hindi_party_name }}">
                                     @error('hindi_party_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -113,7 +115,7 @@ use App\Components\Helper;
                                         class="form-control @error('english_party_description') is-invalid @enderror"
                                         name="english_party_description"
                                         placeholder="{{ __('Enter Party Description In English') }}"
-                                        value="{{ old('english_party_description') }}">
+                                        value="{{ $party_details->english_party_description }}">
                                     @error('english_party_description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -129,7 +131,7 @@ use App\Components\Helper;
                                         class="form-control @error('hindi_party_description') is-invalid @enderror"
                                         name="hindi_party_description"
                                         placeholder="{{ __('Enter Party Description In Hindi') }}"
-                                        value="{{ old('hindi_party_description') }}">
+                                        value="{{ $party_details->hindi_party_description }}">
                                     @error('hindi_party_description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -158,8 +160,11 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        <img id="imagePreviewCentreFirst" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                        {{-- <img id="imagePreviewCentreFirst" src="#" alt="Image Preview"
+                                            style="display: none; max-width: 100%; margin-top: 10px;"> --}}
+                                        <img id="imagePreviewCentreFirst" src="{{ $party_details->centre_image_first }}"
+                                            alt="Image Preview"
+                                            style="max-width: 100%; margin-top: 10px; {{ isset($party_details->centre_image_first) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
                             </div>
@@ -179,8 +184,11 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        <img id="imagePreviewCentreSecond" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                        {{-- <img id="imagePreviewCentreSecond" src="#" alt="Image Preview"
+                                            style="display: none; max-width: 100%; margin-top: 10px;"> --}}
+                                        <img id="imagePreviewCentreSecond"
+                                            src="{{ $party_details->centre_image_second }}" alt="Image Preview"
+                                            style="max-width: 100%; margin-top: 10px; {{ isset($party_details->centre_image_second) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +200,7 @@ use App\Components\Helper;
                         <div class="row mb-4">
                             <div class="col-xs-12 col-sm-12 col-md-12 formBtn">
                                 {{-- <button type="submit" class="btn btn-primary">{{ __('Add') }}</button> --}}
-                                <input type="submit" value="Add" class="btn btn-primary">
+                                <input type="submit" value="Edit" class="btn btn-primary">
                             </div>
                         </div>
 

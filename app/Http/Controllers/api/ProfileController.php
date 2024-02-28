@@ -64,7 +64,24 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $data = $request->all();
+        $data = [
+            'designation' => $request->designation,
+            'state' => $request->state,
+            'city' => $request->city,
+            'name' => $request->name,
+        ];
+
+        if ($request->hasFile('profile_pic')) {
+            $image = $request->file('profile_pic');
+            $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/uploads/users', $imageName); // Store the image in the storage directory
+            // Save the image path or other relevant information to the database
+            $data['profile_pic'] = $imageName;
+        }
+
+        // return $data;
+
+
 
         User::where('id', $user->id)->update($data);
 

@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use App\Base\Model\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends BaseModel
+class City extends Model
 {
-    public static function getCityFromName(State $state, $name)
-    {
-        return self::where([
-            ['state_id', '=', $state->id],
-            ['name', 'like', $name],
-        ])->first();
-    }
+    use HasFactory;
+
+    protected $fillable = [
+        'english_name',
+        'hindi_name',
+        'state_id',
+        'is_deleted'
+    ];
+
 }

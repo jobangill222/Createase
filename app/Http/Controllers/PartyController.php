@@ -12,7 +12,7 @@ class PartyController extends Controller
 
     public function index(Request $request)
     {
-        $data = Parties::orderBy('id', 'desc')->get();
+        $data = Parties::orderBy('id', 'desc')->where('is_deleted', null)->get();
         return view('parties.index')->With('data', $data);
     }
 
@@ -26,12 +26,13 @@ class PartyController extends Controller
         if ($request->isMethod('POST')) {
             // return $request->all();
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
+                'party_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
                 'english_party_name' => 'required|string|max:255',
                 'english_party_description' => 'required|string|max:255',
                 'hindi_party_name' => 'required|string|max:255',
                 'hindi_party_description' => 'required|string|max:255',
-
+                'centre_image_first' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
+                'centre_image_second' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
             ]);
 
             $data = [
@@ -39,18 +40,37 @@ class PartyController extends Controller
                 'english_party_description' => $request->english_party_description,
                 'hindi_party_name' => $request->hindi_party_name,
                 'hindi_party_description' => $request->hindi_party_description
-
             ];
 
             // Handle file upload
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
+            if ($request->hasFile('party_image')) {
+                $image = $request->file('party_image');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/uploads/parties', $imageName); // Store the image in the storage directory
                 // Save the image path or other relevant information to the database
 
                 $data['party_image'] = $imageName;
             }
+
+            if ($request->hasFile('centre_image_first')) {
+                $image = $request->file('centre_image_first');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/uploads/leaders', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+
+                $data['centre_image_first'] = $imageName;
+            }
+
+            if ($request->hasFile('centre_image_second')) {
+                $image = $request->file('centre_image_second');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/uploads/leaders', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+
+                $data['centre_image_second'] = $imageName;
+            }
+
+
 
             Parties::create($data);
 
@@ -58,6 +78,76 @@ class PartyController extends Controller
 
         }
 
+    }
+
+
+    public function edit(Request $request, $id)
+    {
+        if ($request->isMethod('GET')) {
+            $party_details = Parties::where('id', $id)->first();
+            return view('parties.edit')->with('party_details', $party_details);
+
+        }
+        if ($request->isMethod('POST')) {
+
+            $request->validate([
+                // 'party_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
+                'english_party_name' => 'required|string|max:255',
+                'english_party_description' => 'required|string|max:255',
+                'hindi_party_name' => 'required|string|max:255',
+                'hindi_party_description' => 'required|string|max:255',
+                // 'centre_image_first' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
+                // 'centre_image_second' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation rules for the image field
+            ]);
+
+            $data = [
+                'english_party_name' => $request->english_party_name,
+                'english_party_description' => $request->english_party_description,
+                'hindi_party_name' => $request->hindi_party_name,
+                'hindi_party_description' => $request->hindi_party_description
+            ];
+
+            // Handle file upload
+            if ($request->hasFile('party_image')) {
+                $image = $request->file('party_image');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/uploads/parties', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+
+                $data['party_image'] = $imageName;
+            }
+
+            if ($request->hasFile('centre_image_first')) {
+                $image = $request->file('centre_image_first');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/uploads/leaders', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+
+                $data['centre_image_first'] = $imageName;
+            }
+
+            if ($request->hasFile('centre_image_second')) {
+                $image = $request->file('centre_image_second');
+                $imageName = time() . '_' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/uploads/leaders', $imageName); // Store the image in the storage directory
+                // Save the image path or other relevant information to the database
+
+                $data['centre_image_second'] = $imageName;
+            }
+
+            Parties::where('id', $id)->update($data);
+
+            return redirect('parties')->with('success', 'Party has  been edited successfully.');
+
+        }
+
+    }
+
+
+    public function deleteparty(Request $request, $id)
+    {
+        Parties::where('id', $id)->update(['is_deleted' => 'true']);
+        return back()->with('success', 'Paty deleted successfully.');
     }
 
 
@@ -70,10 +160,10 @@ class PartyController extends Controller
 
             $request->validate([
                 'background_image' => 'required|image|mimes:jpeg,png,jpg',
-                'centre_image_1' => 'required|image|mimes:jpeg,png,jpg',
-                'centre_image_2' => 'required|image|mimes:jpeg,png,jpg',
-                'state_image_1' => 'required|image|mimes:jpeg,png,jpg',
-                'state_image_2' => 'required|image|mimes:jpeg,png,jpg',
+                // 'centre_image_1' => 'required|image|mimes:jpeg,png,jpg',
+                // 'centre_image_2' => 'required|image|mimes:jpeg,png,jpg',
+                // 'state_image_1' => 'required|image|mimes:jpeg,png,jpg',
+                // 'state_image_2' => 'required|image|mimes:jpeg,png,jpg',
             ]);
 
             $data = [
@@ -88,34 +178,34 @@ class PartyController extends Controller
                 // Save the image path or other relevant information to the database
                 $data['background_image'] = $imageName;
             }
-            if ($request->hasFile('centre_image_1')) {
-                $centre_image_1 = $request->file('centre_image_1');
-                $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_1->getClientOriginalExtension();
-                $centre_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
-                // Save the image path or other relevant information to the database
-                $data['centre_image_1'] = $imageName;
-            }
-            if ($request->hasFile('centre_image_2')) {
-                $centre_image_2 = $request->file('centre_image_2');
-                $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_2->getClientOriginalExtension();
-                $centre_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
-                // Save the image path or other relevant information to the database
-                $data['centre_image_2'] = $imageName;
-            }
-            if ($request->hasFile('state_image_1')) {
-                $state_image_1 = $request->file('state_image_1');
-                $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_1->getClientOriginalExtension();
-                $state_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
-                // Save the image path or other relevant information to the database
-                $data['state_image_1'] = $imageName;
-            }
-            if ($request->hasFile('state_image_2')) {
-                $state_image_2 = $request->file('state_image_2');
-                $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_2->getClientOriginalExtension();
-                $state_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
-                // Save the image path or other relevant information to the database
-                $data['state_image_2'] = $imageName;
-            }
+            // if ($request->hasFile('centre_image_1')) {
+            //     $centre_image_1 = $request->file('centre_image_1');
+            //     $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_1->getClientOriginalExtension();
+            //     $centre_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+            //     // Save the image path or other relevant information to the database
+            //     $data['centre_image_1'] = $imageName;
+            // }
+            // if ($request->hasFile('centre_image_2')) {
+            //     $centre_image_2 = $request->file('centre_image_2');
+            //     $imageName = time() . '_' . rand(1000, 9999) . '.' . $centre_image_2->getClientOriginalExtension();
+            //     $centre_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+            //     // Save the image path or other relevant information to the database
+            //     $data['centre_image_2'] = $imageName;
+            // }
+            // if ($request->hasFile('state_image_1')) {
+            //     $state_image_1 = $request->file('state_image_1');
+            //     $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_1->getClientOriginalExtension();
+            //     $state_image_1->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+            //     // Save the image path or other relevant information to the database
+            //     $data['state_image_1'] = $imageName;
+            // }
+            // if ($request->hasFile('state_image_2')) {
+            //     $state_image_2 = $request->file('state_image_2');
+            //     $imageName = time() . '_' . rand(1000, 9999) . '.' . $state_image_2->getClientOriginalExtension();
+            //     $state_image_2->storeAs('public/uploads/template', $imageName); // Store the image in the storage directory
+            //     // Save the image path or other relevant information to the database
+            //     $data['state_image_2'] = $imageName;
+            // }
 
             Template::create($data);
 

@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
-use App\Base\Model\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class State extends BaseModel
+class State extends Model
 {
-    public static function getStateFromName(Country $country, $name)
-    {
-        return self::where([
-            ['country_id', '=', $country->id],
-            ['name', 'like', $name],
-        ])->first();
-    }
+    use HasFactory;
+
+
+    protected $table = 'states';
+
+    protected $fillable = [
+        'english_name',
+        'hindi_name',
+        'is_deleted',
+    ];
+
 }

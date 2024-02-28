@@ -21,6 +21,9 @@ class CreatePartiesTable extends Migration
             $table->string('english_party_description')->nullable();
             $table->string('hindi_party_name')->nullable();
             $table->string('hindi_party_description')->nullable();
+            $table->string('centre_image_first')->nullable();
+            $table->string('centre_image_second')->nullable();
+            $table->string('is_deleted')->nullable();
 
             $table->timestamps();
         });

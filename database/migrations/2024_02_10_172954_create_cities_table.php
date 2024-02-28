@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartyStatesTable extends Migration
+class CreateCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,17 @@ class CreatePartyStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('party_states', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
 
             $table->string('english_name')->nullable();
             $table->string('hindi_name')->nullable();
+            $table->integer('state_id')->nullable();
+            $table->integer('is_deleted')->nullable();
+
+            // $table->foreignId('party_state_id')->nullable()->references('id')->on('party_states')->nullOnDelete();
+
+
 
             $table->timestamps();
         });
@@ -30,6 +36,6 @@ class CreatePartyStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('party_states');
+        Schema::dropIfExists('cities');
     }
 }
