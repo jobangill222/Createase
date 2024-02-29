@@ -18,9 +18,16 @@ class StateParties extends Model
         'is_deleted',
     ];
 
+    protected $hidden = [
+        'is_deleted',
+        'created_at',
+        'updated_at'
+    ];
 
-    public function partyDetails(){
-        return $this->belongsTo(Parties::class , 'party_id');
+
+    public function partyDetails()
+    {
+        return $this->belongsTo(Parties::class, 'party_id');
     }
 
 

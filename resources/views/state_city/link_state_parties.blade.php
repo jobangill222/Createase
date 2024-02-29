@@ -6,7 +6,7 @@ use App\Components\Helper;
     <div class="side-app">
         <div class="page-header page-header-wrap">
             <div class="page-header-left">
-                <h1>{{ __('Link Parties') }}</h1>
+                <h1>{{ __('Add Parties') }}</h1>
                 {{-- <p class="pxp-text-light">{{__('List of all users registered on website')}}</p> --}}
             </div>
             {{-- <div class="page-header-right">
@@ -77,7 +77,7 @@ use App\Components\Helper;
                                         @enderror
 
                                         <img id="imagePreviewStateFirst" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                            class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ use App\Components\Helper;
                                         @enderror
 
                                         <img id="imagePreviewStateSecond" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                            class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ use App\Components\Helper;
                         <div class="row mb-4">
                             <div class="col-xs-12 col-sm-12 col-md-12 formBtn">
                                 {{-- <button type="submit" class="btn btn-primary">{{ __('Add') }}</button> --}}
-                                <input type="submit" value="Link" class="btn btn-primary">
+                                <input type="submit" value="Add" class="btn btn-primary">
                             </div>
                         </div>
 
@@ -159,8 +159,7 @@ use App\Components\Helper;
                                         {{-- <a href="{{ url('add-city') . '/' . $item->id }}" class="btn btn-primary mr-4">Link
                                             Party</a> --}}
                                         <a href="{{ url('un-link-state-party') . '/' . $item->id }}"
-                                            class="btn btn-primary">Un-Link
-                                            Party</a>
+                                            class="btn btn-primary">Remove Party</a>
                                     </td>
                                 </tr>
                             @endforeach

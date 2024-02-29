@@ -19,6 +19,11 @@ class Template extends Model
         'deleted_at',
     ];
 
+    protected $hidden = [
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    ];
 
     public function getBackgroundImageAttribute($value)
     {

@@ -17390,13 +17390,19 @@ a.card-tabs-item.active {
 	zoom: 1;
 	overflow: hidden;
 }
-
+.square_image{
+  border-radius: 0px!important;
+}
 .media-object {
 	display: block;
 }
-.media img {
+/* .media img {
 	width: 40px;
     height: 40px;
+} */
+.media img {
+	width: 100;
+    height: 100px;
 }
 .media.media-lg img {
 	width: 70px;

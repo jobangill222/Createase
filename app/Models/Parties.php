@@ -21,6 +21,12 @@ class Parties extends Model
         'is_deleted',
     ];
 
+    protected $hidden = [
+        'is_deleted',
+        'created_at',
+        'updated_at'
+    ];
+
     public function getPartyImageAttribute()
     {
         if ($this->attributes['party_image']) {
@@ -29,7 +35,7 @@ class Parties extends Model
         return null;
     }
 
-    public function getCentreimageFirstAttribute()
+    public function getCentreImageFirstAttribute()
     {
         if ($this->attributes['centre_image_first']) {
             return asset('/storage/uploads/leaders/' . $this->attributes['centre_image_first']);

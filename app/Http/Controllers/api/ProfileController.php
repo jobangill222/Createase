@@ -15,7 +15,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $data = User::where('id', $user->id)->with('userImages')->first();
+        $data = User::where('id', $user->id)->with(['userImages', 'stateDetails', 'cityDetails'])->first();
         return response()->json([
             'status' => 'success',
             'message' => 'User details get successfully.',
@@ -45,9 +45,11 @@ class ProfileController extends Controller
 
 
         $users_existing_image_count = UserImage::where('user_id', $user->id)->count();
-        if ($users_existing_image_count == 3) {
+        if ($users_existing_image_count == 6) {
             $image = UserImage::where('user_id', $user->id)->where('is_active', '!=', 1)->first();
-            $image->delete();
+            if ($image) {
+                $image->delete();
+            }
         }
 
         $create = UserImage::create($data);
@@ -66,8 +68,8 @@ class ProfileController extends Controller
 
         $data = [
             'designation' => $request->designation,
-            'state' => $request->state,
-            'city' => $request->city,
+            'state_id' => $request->state_id,
+            'city_id' => $request->city_id,
             'name' => $request->name,
         ];
 
@@ -85,7 +87,7 @@ class ProfileController extends Controller
 
         User::where('id', $user->id)->update($data);
 
-        $user_details = User::where('id', $user->id)->first();
+        $user_details = User::where('id', $user->id)->with(['userImages', 'stateDetails', 'cityDetails'])->first();
 
         return response()->json([
             'status' => 'success',

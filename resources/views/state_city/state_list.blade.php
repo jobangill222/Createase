@@ -71,6 +71,7 @@ use App\Components\Helper;
                                             class="btn btn-primary mr-4">Edit
                                             State</a>
                                         <a href="{{ url('state/delete') . '/' . $item->id }}"
+                                            onclick="return confirm('Are you sure you want to delete ?')"
                                             class="btn btn-primary mr-4">Delete State</a>
 
                                         <a href="{{ url('add-city') . '/' . $item->id }}" class="btn btn-primary mr-4">Add
@@ -78,8 +79,7 @@ use App\Components\Helper;
                                         <a href="{{ url('city-list') . '/' . $item->id }}" class="btn btn-primary">View
                                             City</a>
                                         <a href="{{ url('link-state-parties') . '/' . $item->id }}"
-                                            class="btn btn-primary">Link
-                                            Parties</a>
+                                            class="btn btn-primary">Add Parties</a>
                                     </td>
 
                                 </tr>

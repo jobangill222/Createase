@@ -91,6 +91,7 @@ use App\Components\Helper;
                                             <a href="{{ url('view-template') . '/' . $item->id }}"
                                                 class="btn btn-primary mr-4">View Template</a>
                                             <a href="{{ url('parties/delete') . '/' . $item->id }}"
+                                                onclick="return confirm('Are you sure you want to delete ?')"
                                                 class="btn btn-primary mr-4">Delete Party</a>
                                         </div>
                                     </td>

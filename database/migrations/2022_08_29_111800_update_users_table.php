@@ -29,6 +29,9 @@ class UpdateUsersTable extends \App\Base\Database\MigrationBase
             $table->foreignId('referred_by')->nullable()->after('referral_code')->references('id')->on('users')->onDelete('cascade');
             $table->text('user_agent')->nullable()->after('referred_by');
             $table->string('created_ip')->nullable()->after('user_agent');
+
+            $table->longText('facebook_id')->nullable();
+
         });
     }
 

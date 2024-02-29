@@ -64,9 +64,10 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        {{-- <img id="imagePreview" src="#" alt="Image Preview"
+                                        {{-- <img id="imagePreview" src="#" alt="Image Preview" class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;"> --}}
                                         <img id="imagePreview" src="{{ $party_details->party_image }}" alt="Image Preview"
+                                            class='square_image'
                                             style="max-width: 100%; margin-top: 10px; {{ isset($party_details->party_image) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
@@ -160,10 +161,10 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        {{-- <img id="imagePreviewCentreFirst" src="#" alt="Image Preview"
+                                        {{-- <img id="imagePreviewCentreFirst" src="#" alt="Image Preview" class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;"> --}}
                                         <img id="imagePreviewCentreFirst" src="{{ $party_details->centre_image_first }}"
-                                            alt="Image Preview"
+                                            alt="Image Preview" class='square_image'
                                             style="max-width: 100%; margin-top: 10px; {{ isset($party_details->centre_image_first) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
@@ -184,10 +185,11 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        {{-- <img id="imagePreviewCentreSecond" src="#" alt="Image Preview"
+                                        {{-- <img id="imagePreviewCentreSecond" src="#" alt="Image Preview" class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;"> --}}
                                         <img id="imagePreviewCentreSecond"
                                             src="{{ $party_details->centre_image_second }}" alt="Image Preview"
+                                            class='square_image'
                                             style="max-width: 100%; margin-top: 10px; {{ isset($party_details->centre_image_second) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>

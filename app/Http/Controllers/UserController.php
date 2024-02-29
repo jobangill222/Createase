@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user = User::where('id', $user->id)->with('userImages')->first();
+        $user = User::where('id', $user->id)->with(['userImages', 'partyDetails', 'stateDetails', 'cityDetails'])->first();
         return view('user.show', compact('user'));
     }
 

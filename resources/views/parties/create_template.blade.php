@@ -63,7 +63,7 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
                                         <img id="backgroundImagePreview" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 100%; margin-top: 10px;">
+                                            class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ use App\Components\Helper;
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <img id="centreImagePreview1" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+                        <img id="centreImagePreview1" src="#" alt="Image Preview" class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ use App\Components\Helper;
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <img id="centreImagePreview2" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+                        <img id="centreImagePreview2" src="#" alt="Image Preview" class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@ use App\Components\Helper;
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <img id="stateImagePreview1" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+                        <img id="stateImagePreview1" src="#" alt="Image Preview" class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ use App\Components\Helper;
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <img id="stateImagePreview2" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+                        <img id="stateImagePreview2" src="#" alt="Image Preview" class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
                     </div>
                         </div>
                     </div>

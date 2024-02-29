@@ -209,7 +209,7 @@ class PartyController extends Controller
 
             Template::create($data);
 
-            return redirect('parties')->with('success', 'Template created successfully.');
+            return redirect('view-template' . '/' . $party_id)->with('success', 'Template created successfully.');
 
         }
     }
@@ -219,7 +219,7 @@ class PartyController extends Controller
     public function viewTemplate(Request $request, $party_id)
     {
         $data = Template::where('party_id', $party_id)->where('deleted_at', null)->orderBy('id', 'desc')->get();
-        return view('parties.party_tempaltes')->with('data', $data);
+        return view('parties.party_tempaltes')->with('data', $data)->with('party_id', $party_id);
     }
 
     public function deleteTemplate(Request $request, $id)

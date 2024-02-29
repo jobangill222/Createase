@@ -64,7 +64,7 @@ use App\Components\Helper;
                                             </span>
                                         @enderror
 
-                                        <img id="imagePreview" src="#" alt="Image Preview"
+                                        <img id="imagePreview" src="#" alt="Image Preview" class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>
@@ -159,6 +159,7 @@ use App\Components\Helper;
                                         @enderror
 
                                         <img id="imagePreviewCentreFirst" src="#" alt="Image Preview"
+                                            class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>
@@ -180,6 +181,7 @@ use App\Components\Helper;
                                         @enderror
 
                                         <img id="imagePreviewCentreSecond" src="#" alt="Image Preview"
+                                            class='square_image'
                                             style="display: none; max-width: 100%; margin-top: 10px;">
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@ class CreateCitiesTable extends Migration
             $table->string('english_name')->nullable();
             $table->string('hindi_name')->nullable();
             $table->integer('state_id')->nullable();
-            $table->integer('is_deleted')->nullable();
+            $table->string('is_deleted')->nullable();
 
             // $table->foreignId('party_state_id')->nullable()->references('id')->on('party_states')->nullOnDelete();
 

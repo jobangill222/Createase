@@ -50,6 +50,8 @@ class User extends BaseModel implements
         'referral_code',
         'referred_by',
         'user_agent',
+        'current_party',
+        'facebook_id',
         'remember_token',
         'created_at',
         'updated_at',
@@ -64,17 +66,17 @@ class User extends BaseModel implements
     protected $hidden = [
         'password',
         'remember_token',
-        // 'phone_number_verified_at',
-        // 'country_id',
-        // 'state_id',
-        // 'city_id',
-        // 'user_role_id',
-        // 'referral_code',
-        // 'referred_by',
-        // 'user_agent',
-        // 'created_ip',
-        // 'created_at',
-        // 'updated_at'
+        'phone_number_verified_at',
+        'country_id',
+        // 'email_verified_at', 
+        // 'status',
+        'user_role_id',
+        'referral_code',
+        'referred_by',
+        'user_agent',
+        'created_ip',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -182,12 +184,28 @@ class User extends BaseModel implements
     }
 
 
-    public function getCurrentPartyAttribute()
+    public function stateDetails()
     {
-        if ($this->attributes['current_party']) {
-            // return $this->belongsTo(Parties::class);
-            return Parties::where('id', $this->attributes['current_party'])->first();
-        }
+        return $this->belongsTo(State::class, 'state_id')->select('id', 'english_name', 'hindi_name');
     }
+
+    public function cityDetails()
+    {
+        return $this->belongsTo(City::class, 'city_id')->select('id', 'english_name', 'hindi_name');
+    }
+
+
+    public function partyDetails()
+    {
+        return $this->belongsTo(Parties::class, 'current_party');
+    }
+
+    // public function getCurrentPartyAttribute()
+    // {
+    //     if ($this->attributes['current_party']) {
+    //         // return $this->belongsTo(Parties::class);
+    //         return Parties::where('id', $this->attributes['current_party'])->first();
+    //     }
+    // }
 
 }

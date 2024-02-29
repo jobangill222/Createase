@@ -22,7 +22,7 @@
             <div class="media">
                 <div class="media-body">
 
-                    <div>
+                    <div class="">
                         <label>Profile Image</label>
                         @if ($user->profile_pic)
                             <span class="tx-medium">
@@ -54,7 +54,7 @@
             <div class="media">
                 <div class="media-body">
                     <div>
-                        <label>Designtaion</label> <span class="tx-medium">{{ $user->designtaion ?? 'N/A' }}</span>
+                        <label>Designtaion</label> <span class="tx-medium">{{ $user->designation ?? 'N/A' }}</span>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <div class="media-body">
                     <div>
                         <label>Current Party</label> <span
-                            class="tx-medium">{{ isset($user->current_party->english_party_name) ? $user->current_party->english_party_name : 'N/A' }}</span>
+                            class="tx-medium">{{ isset($user->partyDetails->english_party_name) ? $user->partyDetails->english_party_name : 'N/A' }}</span>
                     </div>
 
                 </div>
@@ -87,10 +87,11 @@
                 <div class="media-body">
 
                     <div>
-                        <label>State</label> <span class="tx-medium">{{ $user->state ?? 'N/A' }}</span>
+                        <label>State</label> <span
+                            class="tx-medium">{{ $user->stateDetails->english_name ?? 'N/A' }}</span>
                     </div>
                     <div>
-                        <label>City</label> <span class="tx-medium">{{ $user->city ?? 'N/A' }}</span>
+                        <label>City</label> <span class="tx-medium">{{ $user->cityDetails->english_name ?? 'N/A' }}</span>
                     </div>
                 </div>
             </div>

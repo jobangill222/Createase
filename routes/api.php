@@ -39,7 +39,7 @@ Route::group(['middleware' => ['user']], function () {
 
 
     Route::get('/get-party', [App\Http\Controllers\Api\UserController::class, 'getParty']);
-    Route::get('/get-template/{party_id}', [App\Http\Controllers\Api\UserController::class, 'getPartyTemplate']);
+    Route::get('/get-templates', [App\Http\Controllers\Api\UserController::class, 'getPartyTemplate']);
     Route::get('/get-state', [App\Http\Controllers\Api\UserController::class, 'getState']);
     Route::get('/get-city/{state_id}', [App\Http\Controllers\Api\UserController::class, 'getCity']);
 

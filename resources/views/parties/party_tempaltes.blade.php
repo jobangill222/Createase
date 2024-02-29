@@ -9,6 +9,9 @@ use App\Components\Helper;
                 <h1>{{ __('Party Templates') }}</h1>
                 {{-- <p class="pxp-text-light">{{__('List of all users registered on website')}}</p> --}}
             </div>
+            <div class="page-header-right">
+                <a href="{{ url('create-template') . '/' . $party_id }}" class="btn btn-primary">{{ __('Add Template') }}</a>
+            </div>
 
         </div>
 
@@ -65,13 +68,14 @@ use App\Components\Helper;
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td> <img src={{ $item->background_image }}> </td>
+                                    <td> <img class="square_image" src={{ $item->background_image }}> </td>
                                     {{-- <td> <img src={{ $item->centre_image_1 }}> </td>
                                     <td> <img src={{ $item->centre_image_2 }}> </td>
                                     <td> <img src={{ $item->state_image_1 }}> </td>
                                     <td> <img src={{ $item->state_image_2 }}> </td> --}}
                                     <td>
                                         <a href="{{ url('delete-template') . '/' . $item->id }}"
+                                            onclick="return confirm('Are you sure you want to delete ?')"
                                             class="btn btn-primary mr-4">Delete</button>
                                     </td>
                                 </tr>

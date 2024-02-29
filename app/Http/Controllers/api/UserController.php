@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\DownloadPoster;
 use App\Models\Parties;
 use App\Models\PartyCity;
 use App\Models\PartyState;
 use App\Models\State;
+use App\Models\StateParties;
 use App\Models\Template;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -28,7 +31,7 @@ class UserController extends Controller
 
     public function getCity(Request $request, $state_id)
     {
-        $data = City::where('party_state_id', $state_id)->orderBy('english_name', 'asc')->get();
+        $data = City::where('state_id', $state_id)->orderBy('english_name', 'asc')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'City get successfully.',
@@ -47,13 +50,35 @@ class UserController extends Controller
         ]);
     }
 
-    public function getPartyTemplate(Request $request, $party_id)
+    public function getPartyTemplate(Request $request)
     {
-        $data = Template::where('party_id', $party_id)->get();
+        $user = Auth::user();
+
+        $user_details = User::where("id", $user->id)->first();
+
+        if (!$user_details->current_party) {
+            return response()->json(['status' => 'error', 'message' => 'Please select party first']);
+        }
+
+        if (!$user_details->state_id) {
+            return response()->json(['status' => 'error', 'message' => 'Please select state first']);
+        }
+
+        // return $user;
+        $party_details = Parties::where('id', $user_details->current_party)->first();
+        $state_images_details = StateParties::where(['party_id' => $user_details->current_party, 'state_id' => $user_details->state_id])->first();
+
+
+        $template = Template::where('party_id', $user_details->current_party)->get();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Templates get successfully.',
-            'data' => $data,
+            'data' => [
+                'party_details' => $party_details,
+                'state_images' => $state_images_details,
+                'templates' => $template
+            ],
         ]);
     }
 

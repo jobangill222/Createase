@@ -69,7 +69,9 @@ use App\Components\Helper;
                                     <th>
                                         <a href="{{ url('edit-city') . '/' . $item->id }}" class="btn btn-primary">Edit
                                             City</a>
-                                        <a href="{{ url('delete-city') . '/' . $item->id }}" class="btn btn-primary">Delete
+                                        <a href="{{ url('delete-city') . '/' . $item->id }}"
+                                            onclick="return confirm('Are you sure you want to delete ?')"
+                                            class="btn btn-primary">Delete
                                             City</a>
 
                                     </th>

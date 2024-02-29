@@ -26,9 +26,13 @@ class AuthController extends Controller
         // If user exists, update their details
         if ($user) {
             // Assuming you have other fields to update, you can update them here
-            $user->update([
-                // Update other fields as needed
-            ]);
+
+            if ($request->facebook_id) {
+                $user->update([
+                    // Update other fields as needed
+                    'facebook_id' => $request->facebook_id
+                ]);
+            }
         } else {
             // If user does not exist, create a new user
             $user = User::create([
