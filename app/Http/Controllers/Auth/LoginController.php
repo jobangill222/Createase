@@ -87,7 +87,7 @@ class LoginController extends Controller
                 'created_at' => date(CommonConstants::PHP_DATE_FORMAT),
                 'created_ip' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'country_id' => $country_ip ? $country_ip['country']->id : null,
+                // 'country_id' => $country_ip ? $country_ip['country']->id : null,
             ]);
 
             if (\Session::has('redirect_after_login')) {
