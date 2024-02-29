@@ -37,7 +37,6 @@ class UserController extends Controller
         ]);
     }
 
-
     public function getParty(Request $request)
     {
         $data = Parties::orderBy('english_party_name', 'asc')->get();
@@ -46,6 +45,7 @@ class UserController extends Controller
             'message' => 'Party get successfully.',
             'data' => $data,
         ]);
+        //check
     }
 
     public function getPartyTemplate(Request $request)
