@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\DownloadPoster;
 use App\Models\Parties;
-use App\Models\PartyCity;
-use App\Models\PartyState;
 use App\Models\State;
 use App\Models\StateParties;
 use App\Models\Template;
