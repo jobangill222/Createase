@@ -55,19 +55,19 @@ class BaseModel extends Model
 
     public static function nextDisplayOrder()
     {
-        $count=1;
-        $row=self::query()->orderByDesc("display_order")->firstOrFail();
-        if($row!=null) {
-            $count+=$row->display_order;
+        $count = 1;
+        $row = self::query()->orderByDesc("display_order")->firstOrFail();
+        if ($row != null) {
+            $count += $row->display_order;
         }
         return $count;
     }
 
     public static function generateReferenceNumber()
     {
-        $number=rand(1000,9999).rand(1000,9999);
-        $check=self::query()->where('ref_no','=',$number)->first();
-        if($check!=null) {
+        $number = rand(1000, 9999) . rand(1000, 9999);
+        $check = self::query()->where('ref_no', '=', $number)->first();
+        if ($check != null) {
             return self::generateReferenceNumber();
         }
         return $number;
@@ -80,10 +80,10 @@ class BaseModel extends Model
         if (is_array($this->fillable)) {
 
             if (in_array('uuid', $this->fillable)) {
-                $this->uuid = (string)Str::uuid();
+                $this->uuid = (string) Str::uuid();
             }
             if (in_array('ref_no', $this->fillable)) {
-                $this->ref_no = (string)self::generateReferenceNumber();
+                $this->ref_no = (string) self::generateReferenceNumber();
             }
 
             if (in_array('created_at', $this->fillable)) {
@@ -110,16 +110,16 @@ class BaseModel extends Model
                 }
             }
 
-            if (in_array('country_id', $this->fillable)) {
-                if ($this->country_id == null) {
-                    $ipDetails = Helper::fetchIpDetails($ip, true);
-                    $this->country_id = ($ipDetails ? $ipDetails['country']->id : null);
-                }
+            // if (in_array('country_id', $this->fillable)) {
+            //     if ($this->country_id == null) {
+            //         $ipDetails = Helper::fetchIpDetails($ip, true);
+            //         $this->country_id = ($ipDetails ? $ipDetails['country']->id : null);
+            //     }
 
-                if($this->country_id==null) {
-                    $this->country_id=CommonConstants::DEFAULT_COUNTRY;
-                }
-            }
+            //     if($this->country_id==null) {
+            //         $this->country_id=CommonConstants::DEFAULT_COUNTRY;
+            //     }
+            // }
 
             if (in_array('user_agent', $this->fillable)) {
                 if ($this->user_agent == null) {
