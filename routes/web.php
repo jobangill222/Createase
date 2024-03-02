@@ -74,6 +74,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::match(['GET', 'POST'], '/un-link-state-party/{id}', [App\Http\Controllers\StateCityController::class, 'unLinkStateparty']);
 
+        Route::match(['GET', 'POST'], '/filter-list', [App\Http\Controllers\FilterController::class, 'filterList']);
+        Route::match(['GET', 'POST'], '/add-filter', [App\Http\Controllers\FilterController::class, 'addFilter']);
+        Route::match(['GET', 'POST'], '/edit-filter/{id}', [App\Http\Controllers\FilterController::class, 'editFilter']);
+        Route::match(['GET', 'POST'], '/delete-filter/{id}', [App\Http\Controllers\FilterController::class, 'deleteFilter']);
+
+
 
 
 
