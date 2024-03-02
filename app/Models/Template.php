@@ -11,11 +11,9 @@ class Template extends Model
 
     protected $fillable = [
         'party_id',
+        'state_id',
         'background_image',
-        'centre_image_1',
-        'centre_image_2',
-        'state_image_1',
-        'state_image_2',
+        'filter_ids',
         'deleted_at',
     ];
 
@@ -25,26 +23,30 @@ class Template extends Model
         'updated_at'
     ];
 
+    protected $appends = [
+        'filters'
+    ];
+
     public function getBackgroundImageAttribute($value)
     {
         return asset('/storage/uploads/template/' . $value);
     }
 
-    public function getCentreImage1Attribute($value)
+
+    public function stateDetails()
     {
-        return asset('/storage/uploads/template/' . $value);
+        return $this->belongsTo(State::class, 'state_id');
     }
-    public function getCentreImage2Attribute($value)
+
+    public function getFiltersAttribute()
     {
-        return asset('/storage/uploads/template/' . $value);
+        if ($this->attributes['filter_ids']) {
+            $filterString = json_decode($this->attributes['filter_ids']);
+            $data = Filter::whereIn('id', $filterString)->pluck('english_name')->implode(', ');
+            return $data;
+        }
+        return null;
     }
-    public function getStateImage1Attribute($value)
-    {
-        return asset('/storage/uploads/template/' . $value);
-    }
-    public function getStateImage2Attribute($value)
-    {
-        return asset('/storage/uploads/template/' . $value);
-    }
+
 
 }

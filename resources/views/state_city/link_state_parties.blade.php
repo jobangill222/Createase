@@ -148,11 +148,27 @@ use App\Components\Helper;
                                     <td>{{ $item->partyDetails->english_party_name }}</td>
                                     <td>{{ $item->partyDetails->hindi_party_name }}</td>
 
-                                    <td>
+                                    {{-- <td>
                                         <img src="{{ $item->state_leader_first }}">
                                     </td>
                                     <td>
                                         <img src="{{ $item->state_leader_second }}">
+                                    </td> --}}
+                                    <td>
+                                        @if ($item->state_leader_first)
+                                            <img src={{ $item->state_leader_first }}>
+                                        @else
+                                            {{ 'No Image' }}
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        @if ($item->state_leader_second)
+                                            <img src={{ $item->state_leader_second }}>
+                                        @else
+                                            {{ 'No Image' }}
+                                        @endif
+
                                     </td>
 
                                     <td>

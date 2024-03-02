@@ -162,8 +162,8 @@ class StateCityController extends Controller
 
             $request->validate([
                 'party_id' => 'required',
-                'state_image_first' => 'required|image|mimes:jpeg,png,jpg',
-                'state_image_second' => 'required|image|mimes:jpeg,png,jpg',
+                // 'state_image_first' => 'required|image|mimes:jpeg,png,jpg',
+                // 'state_image_second' => 'required|image|mimes:jpeg,png,jpg',
             ]);
 
             $check_party_already_linked = StateParties::where('state_id', $state_id)->where('party_id', $request->party_id)->where('is_deleted', null)->first();

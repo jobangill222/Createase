@@ -10,6 +10,8 @@ use App\Models\State;
 use App\Models\StateParties;
 use App\Models\Template;
 use App\Models\User;
+use App\Models\Filter;
+
 use Auth;
 use Illuminate\Http\Request;
 
@@ -48,7 +50,7 @@ class UserController extends Controller
         //check
     }
 
-    public function getPartyTemplate(Request $request)
+    public function getTemplate(Request $request)
     {
         $user = Auth::user();
 
@@ -64,17 +66,33 @@ class UserController extends Controller
 
         // return $user;
         $party_details = Parties::where('id', $user_details->current_party)->first();
-        $state_images_details = StateParties::where(['party_id' => $user_details->current_party, 'state_id' => $user_details->state_id])->first();
+        $current_state_leaders = StateParties::where(['party_id' => $user_details->current_party, 'state_id' => $user_details->state_id])->first();
 
 
-        $template = Template::where('party_id', $user_details->current_party)->get();
+        $where = [
+            'party_id' => $user_details->current_party,
+            'state_id' => $user_details->state_id,
+            'deleted_at' => null
+        ];
+
+
+        $inputArray = explode(',', $request->filter_ids);
+
+        // $template = Template::where($where)->whereJsonContains('filter_ids', explode(',', $request->filter_ids))->get();
+        $template = Template::where($where)
+            ->where(function ($query) use ($inputArray) {
+                foreach ($inputArray as $value) {
+                    $query->orWhereJsonContains('filter_ids', $value);
+                }
+            })
+            ->get();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Templates get successfully.',
             'data' => [
                 'party_details' => $party_details,
-                'state_images' => $state_images_details,
+                'current_state_leaders' => $current_state_leaders,
                 'templates' => $template
             ],
         ]);
@@ -104,6 +122,17 @@ class UserController extends Controller
             'status' => 'success',
             'message' => 'Save successfully.',
             'data' => $create,
+        ]);
+    }
+
+
+    public function getFilterList()
+    {
+        $data = Filter::get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Filter get successfully.',
+            'data' => $data,
         ]);
     }
 

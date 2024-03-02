@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTemplatesTable extends Migration
+class CreateFiltersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('templates', function (Blueprint $table) {
+        Schema::create('filters', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('party_id')->nullable();
-            $table->integer('state_id')->nullable();
-            $table->string('background_image')->nullable();
-            $table->json('filter_ids')->nullable();
-            $table->string('deleted_at')->nullable();
+            $table->string('english_name')->nullable();
+            $table->string('hindi_name')->nullable();
 
             $table->timestamps();
         });
@@ -33,6 +30,6 @@ class CreateTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('templates');
+        Schema::dropIfExists('filters');
     }
 }

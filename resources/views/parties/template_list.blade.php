@@ -52,10 +52,9 @@ use App\Components\Helper;
                                 <tr>
                                     <th>{{ __('S.No') }}</th>
                                     <th>{{ __('Background Image') }}</th>
-                                    {{-- <th>{{__('Centre Image 1')}}</th>
-                        <th>{{__('Centre Image 2')}}</th>
-                        <th>{{__('State Image 1')}}</th>
-                        <th>{{__('State Image 2')}}</th> --}}
+                                    <th>{{ __('State Name') }}</th>
+                                    <th>{{ __('Mapped Filter') }}</th>
+
                                     <th>{{ __('Action') }}</th>
 
                                 </tr>
@@ -69,14 +68,14 @@ use App\Components\Helper;
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td> <img class="square_image" src={{ $item->background_image }}> </td>
-                                    {{-- <td> <img src={{ $item->centre_image_1 }}> </td>
-                                    <td> <img src={{ $item->centre_image_2 }}> </td>
-                                    <td> <img src={{ $item->state_image_1 }}> </td>
-                                    <td> <img src={{ $item->state_image_2 }}> </td> --}}
+                                    <td> {{ $item->stateDetails->english_name ?? 'N/A' }} </td>
+                                    <td> {{ $item->filters ?? 'N/A' }} </td>
                                     <td>
-                                        <a href="{{ url('delete-template') . '/' . $item->id }}"
-                                            onclick="return confirm('Are you sure you want to delete ?')"
-                                            class="btn btn-primary mr-4">Delete</button>
+                                        <a href="{{ url('edit-template') . '/' . $item->id }}"
+                                            class="btn btn-primary mr-4">Edit</button>
+                                            <a href="{{ url('delete-template') . '/' . $item->id }}"
+                                                onclick="return confirm('Are you sure you want to delete ?')"
+                                                class="btn btn-primary mr-4">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

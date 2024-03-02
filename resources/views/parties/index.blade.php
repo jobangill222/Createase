@@ -79,8 +79,21 @@ use App\Components\Helper;
                                     <td>{{ $item->hindi_party_name }}</td>
                                     <td>{{ $item->hindi_party_description }}</td>
 
-                                    <td> <img src={{ $item->centre_image_first }}> </td>
-                                    <td> <img src={{ $item->centre_image_second }}> </td>
+                                    <td>
+                                        @if ($item->centre_image_first)
+                                            <img src={{ $item->centre_image_first }}>
+                                        @else
+                                            {{ 'No Image' }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->centre_image_second)
+                                            <img src={{ $item->centre_image_second }}>
+                                        @else
+                                            {{ 'No Image' }}
+                                        @endif
+
+                                    </td>
 
                                     <td>
                                         <div class="d-flex">

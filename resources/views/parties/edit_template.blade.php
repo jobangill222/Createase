@@ -57,7 +57,9 @@ use App\Components\Helper;
                                     <select class="form-control" name="state_id">
                                         <option value="">Select State</option>
                                         @foreach ($states as $row)
-                                            <option value="{{ $row->id }}">{{ $row->english_name }}</option>
+                                            <option value="{{ $row->id }}"
+                                                @if ($row->id == $template_details->state_id) selected @endif>{{ $row->english_name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('state_id')
@@ -68,7 +70,10 @@ use App\Components\Helper;
                                 </div>
                             </div>
                         </div>
-
+                        <?php
+                        // dd($template_details->filter_ids);
+                        // dd(in_array('1', json_decode($template_details->filter_ids)));
+                        ?>
 
                         <div class="row">
                             <div class="col-md-6 col-6">
@@ -77,8 +82,22 @@ use App\Components\Helper;
                                     <select id="filter" name="filter[]" multiple="multiple" class="form-control"
                                         required="">
                                         <option value="">Select Filter</option>
+
                                         @foreach ($filters as $item)
-                                            <option value="{{ $item->id }}">{{ $item->english_name }}</option>
+                                            @if ($template_details->filter_ids)
+                                                @php
+                                                    $isSelected = in_array(
+                                                        $item->id,
+                                                        json_decode($template_details->filter_ids),
+                                                    );
+                                                @endphp
+                                                <option value="{{ $item->id }}"
+                                                    @if ($isSelected) selected @endif>
+                                                    {{ $item->english_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->english_name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('filter')
@@ -108,8 +127,11 @@ use App\Components\Helper;
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <img id="backgroundImagePreview" src="#" alt="Image Preview"
-                                            class='square_image' style="display: none; max-width: 100%; margin-top: 10px;">
+                                        {{-- <img id="backgroundImagePreview" src="#" alt="Image Preview"
+                                            class='square_image' style="display: none; max-width: 100%; margin-top: 10px;"> --}}
+                                        <img id="backgroundImagePreview" src="{{ $template_details->background_image }}"
+                                            alt="Image Preview" class='square_image'
+                                            style="max-width: 100%; margin-top: 10px; {{ isset($template_details->background_image) ? 'display: block;' : 'display: none;' }}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +145,7 @@ use App\Components\Helper;
                         <div class="row mb-4">
                             <div class="col-xs-12 col-sm-12 col-md-12 formBtn">
                                 {{-- <button type="submit" class="btn btn-primary">{{ __('Add') }}</button> --}}
-                                <input type="submit" value="Add" class="btn btn-primary">
+                                <input type="submit" value="Edit" class="btn btn-primary">
                             </div>
                         </div>
                     </div>

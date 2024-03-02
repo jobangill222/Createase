@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::match(['GET', 'POST'], '/create-template/{party_id}', [App\Http\Controllers\PartyController::class, 'createTemplate']);
         Route::match(['GET', 'POST'], '/view-template/{party_id}', [App\Http\Controllers\PartyController::class, 'viewTemplate']);
         Route::match(['GET', 'POST'], '/delete-template/{id}', [App\Http\Controllers\PartyController::class, 'deleteTemplate']);
+        Route::match(['GET', 'POST'], '/edit-template/{id}', [App\Http\Controllers\PartyController::class, 'editTemplate']);
+
 
 
 
