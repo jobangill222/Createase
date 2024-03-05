@@ -127,4 +127,15 @@ class ProfileController extends Controller
         ]);
     }
 
+
+    public function deleteDraftImage(Request $request, $image_id)
+    {
+        UserImage::where('id', $image_id)->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Draft image deleted successfully.',
+        ]);
+    }
+
+
 }
