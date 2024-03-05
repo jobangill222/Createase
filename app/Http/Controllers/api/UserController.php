@@ -79,13 +79,19 @@ class UserController extends Controller
         $inputArray = explode(',', $request->filter_ids);
 
         // $template = Template::where($where)->whereJsonContains('filter_ids', explode(',', $request->filter_ids))->get();
-        $template = Template::where($where)
-            ->where(function ($query) use ($inputArray) {
-                foreach ($inputArray as $value) {
-                    $query->orWhereJsonContains('filter_ids', $value);
-                }
-            })
-            ->get();
+
+        if ($request->filter_ids) {
+            $template = Template::where($where)
+                ->where(function ($query) use ($inputArray) {
+                    foreach ($inputArray as $value) {
+                        $query->orWhereJsonContains('filter_ids', $value);
+                    }
+                })
+                ->get();
+        } else {
+            $template = Template::where($where)->get();
+        }
+
 
         return response()->json([
             'status' => 'success',

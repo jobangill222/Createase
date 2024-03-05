@@ -66,11 +66,12 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+        $user_details = User::where('id', $user->id)->first();
         $data = [
-            'designation' => $request->designation,
-            'state_id' => $request->state_id,
-            'city_id' => $request->city_id,
-            'name' => $request->name,
+            'designation' => $request->designation ?? $user_details->designation,
+            'state_id' => $request->state_id ?? $user_details->state_id,
+            'city_id' => $request->city_id ?? $user_details->city_id,
+            'name' => $request->name ?? $user_details->name,
         ];
 
         if ($request->hasFile('profile_pic')) {
