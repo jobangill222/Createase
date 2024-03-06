@@ -25,7 +25,7 @@ class AuthController extends Controller
             $user = User::where('facebook_id', $request->facebook_id)->first();
             if (!$user) {
                 if (!$request->phone_number) {
-                    return response()->json(['status' => 'error', 'message' => 'Enter phone number']);
+                    return response()->json(['status' => 'error', 'message' => 'Enter phone number'],300);
                 } else {
                     $is_phone_already_exist = User::where('phone_number', $request->phone_number)->first();
                     if ($is_phone_already_exist) {
