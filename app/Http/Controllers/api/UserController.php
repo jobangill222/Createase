@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function getState(Request $request)
     {
-        $data = State::orderBy('english_name', 'asc')->get();
+        $data = State::orderBy('english_name', 'asc')->where('is_deleted' , null)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'State get successfully.',
@@ -31,7 +31,7 @@ class UserController extends Controller
 
     public function getCity(Request $request, $state_id)
     {
-        $data = City::where('state_id', $state_id)->orderBy('english_name', 'asc')->get();
+        $data = City::where('state_id', $state_id)->orderBy('english_name', 'asc')->where('is_deleted' , null)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'City get successfully.',
