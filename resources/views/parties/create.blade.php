@@ -52,7 +52,7 @@ use App\Components\Helper;
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group required-field text-left @error('name') is-invalid @enderror">
-                                    <label for="name">{{ __('Party Name') }}</label>
+                                    <label for="name">{{ __('Party Image') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="image" type="file"

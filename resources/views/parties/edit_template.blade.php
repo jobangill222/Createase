@@ -8,7 +8,7 @@ use App\Components\Helper;
     <div class="side-app">
         <div class="page-header page-header-wrap">
             <div class="page-header-left">
-                <h1>{{ __('Create Template') }}</h1>
+                <h1>{{ __('Edit Template') }}</h1>
             </div>
 
         </div>

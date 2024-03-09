@@ -173,12 +173,10 @@ class PartyController extends Controller
                 'filter' => 'required',
             ]);
 
-            $data = [
-                'party_id' => $party_id,
-                'state_id' => $request->state_id,
-                'filter_ids' => json_encode($request->filter)
-            ];
+            $states  = $request->state_id;
 
+
+            
             // Handle file upload
             if ($request->hasFile('background_image')) {
                 $background_image = $request->file('background_image');
@@ -188,7 +186,16 @@ class PartyController extends Controller
                 $data['background_image'] = $imageName;
             }
 
-            Template::create($data);
+            foreach($states as $item){
+
+                    $data['party_id'] = $party_id;
+                    $data['state_id'] = $item;
+                    $data['filter_ids'] = json_encode($request->filter);
+
+                    Template::create($data);
+
+            }
+
 
             return redirect('view-template' . '/' . $party_id)->with('success', 'Template created successfully.');
 

@@ -54,7 +54,7 @@ use App\Components\Helper;
                             <div class="col-md-6 col-6">
                                 <div class="form-group required-field text-left @error('name') is-invalid @enderror">
                                     <label for="state_id">{{ __('State') }}</label>
-                                    <select class="form-control" name="state_id">
+                                    <select class="form-control" id="state_id" multiple="multiple" name="state_id[]">
                                         <option value="">Select State</option>
                                         @foreach ($states as $row)
                                             <option value="{{ $row->id }}">{{ $row->english_name }}</option>
@@ -175,6 +175,9 @@ use App\Components\Helper;
         $(document).ready(function() {
             $('#filter').select2({
                 placeholder: 'Select Filter'
+            });
+            $('#state_id').select2({
+                placeholder: 'Select State'
             });
         });
     </script>
