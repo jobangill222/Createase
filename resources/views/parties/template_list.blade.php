@@ -67,8 +67,8 @@ use App\Components\Helper;
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td> <img class="square_image" src={{ $item->background_image }}> </td>
-                                    <td> {{ $item->stateDetails->english_name ?? 'N/A' }} </td>
+                                    <td> <img class="square_image" src="{{ $item->background_image }}"> </td>
+                                    <td> {{ $item->states ?? 'N/A' }} </td>
                                     <td> {{ $item->filters ?? 'N/A' }} </td>
                                     <td>
                                         <a href="{{ url('edit-template') . '/' . $item->id }}"

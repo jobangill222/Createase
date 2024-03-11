@@ -71,7 +71,7 @@ class UserController extends Controller
 
         $where = [
             'party_id' => $user_details->current_party,
-            'state_id' => $user_details->state_id,
+            // 'state_id' => $user_details->state_id,
             'deleted_at' => null
         ];
 
@@ -81,7 +81,7 @@ class UserController extends Controller
         // $template = Template::where($where)->whereJsonContains('filter_ids', explode(',', $request->filter_ids))->get();
 
         if ($request->filter_ids) {
-            $template = Template::where($where)
+            $template = Template::where($where)->whereJsonContains('state_id' ,$user_details->state_id )
                 ->where(function ($query) use ($inputArray) {
                     foreach ($inputArray as $value) {
                         $query->orWhereJsonContains('filter_ids', $value);
@@ -89,7 +89,7 @@ class UserController extends Controller
                 })
                 ->get();
         } else {
-            $template = Template::where($where)->get();
+            $template = Template::where($where)->whereJsonContains('state_id' ,$user_details->state_id )->get();
         }
 
 

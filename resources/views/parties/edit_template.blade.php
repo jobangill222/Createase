@@ -54,13 +54,29 @@ use App\Components\Helper;
                             <div class="col-md-6 col-6">
                                 <div class="form-group required-field text-left @error('name') is-invalid @enderror">
                                     <label for="state_id">{{ __('State') }}</label>
-                                    <select class="form-control" name="state_id">
+                                    <select class="form-control" id="state_id" name="state_id[]" multiple="multiple">
                                         <option value="">Select State</option>
-                                        @foreach ($states as $row)
-                                            <option value="{{ $row->id }}"
-                                                @if ($row->id == $template_details->state_id) selected @endif>{{ $row->english_name }}
+                                        
+
+                                        @foreach ($states as $item)
+                                            @php
+                                                $isSelected = false;
+                                                if ($template_details->state_id) {
+                                                    if (is_array(json_decode($template_details->state_id, true))) {
+                                                        // If state_id is a JSON string
+                                                        $isSelected = in_array($item->id, json_decode($template_details->state_id, true));
+                                                    } else {
+                                                        // If state_id is an integer
+                                                        $isSelected = ($item->id == $template_details->state_id);
+                                                    }
+                                                }
+                                            @endphp
+                                            <option value="{{ $item->id }}" @if ($isSelected) selected @endif>
+                                                {{ $item->english_name }}
                                             </option>
                                         @endforeach
+
+
                                     </select>
                                     @error('state_id')
                                         <span class="invalid-feedback" role="alert">
@@ -196,6 +212,9 @@ use App\Components\Helper;
     <script>
         $(document).ready(function() {
             $('#filter').select2({
+                placeholder: 'Select Filter'
+            });
+            $('#state_id').select2({
                 placeholder: 'Select Filter'
             });
         });

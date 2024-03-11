@@ -173,7 +173,7 @@ class PartyController extends Controller
                 'filter' => 'required',
             ]);
 
-            $states  = $request->state_id;
+            // $states  = $request->state_id;
 
 
             
@@ -186,16 +186,20 @@ class PartyController extends Controller
                 $data['background_image'] = $imageName;
             }
 
-            foreach($states as $item){
+            // foreach($states as $item){
 
-                    $data['party_id'] = $party_id;
-                    $data['state_id'] = $item;
-                    $data['filter_ids'] = json_encode($request->filter);
+            //         $data['party_id'] = $party_id;
+            //         $data['state_id'] = $item;
+            //         $data['filter_ids'] = json_encode($request->filter);
 
-                    Template::create($data);
+            //         Template::create($data);
 
-            }
+            // }
+            $data['party_id'] = $party_id;
+            $data['state_id'] = json_encode($request->state_id);
+            $data['filter_ids'] = json_encode($request->filter);
 
+            Template::create($data);
 
             return redirect('view-template' . '/' . $party_id)->with('success', 'Template created successfully.');
 
@@ -206,7 +210,7 @@ class PartyController extends Controller
 
     public function viewTemplate(Request $request, $party_id)
     {
-        $data = Template::where('party_id', $party_id)->where('deleted_at', null)->orderBy('id', 'desc')->with('stateDetails')->get();
+        $data = Template::where('party_id', $party_id)->where('deleted_at', null)->orderBy('id', 'desc')->get();
         return view('parties.template_list')->with('data', $data)->with('party_id', $party_id);
     }
 
@@ -238,7 +242,7 @@ class PartyController extends Controller
             ]);
 
             $data = [
-                'state_id' => $request->state_id,
+                'state_id' => json_encode($request->state_id),
                 'filter_ids' => json_encode($request->filter)
             ];
 
