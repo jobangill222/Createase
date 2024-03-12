@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function getParty(Request $request)
     {
-        $data = Parties::orderBy('english_party_name', 'asc')->get();
+        $data = Parties::orderBy('english_party_name', 'asc')->where('is_deleted' , null)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'Party get successfully.',

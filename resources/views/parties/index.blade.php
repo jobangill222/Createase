@@ -88,7 +88,7 @@ use App\Components\Helper;
                                     </td>
                                     <td>
                                         @if ($item->centre_image_second)
-                                            <img src={{ $item->centre_image_second }}>
+                                            <img src="{{ $item->centre_image_second }}">
                                         @else
                                             {{ 'No Image' }}
                                         @endif
