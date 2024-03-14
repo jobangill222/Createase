@@ -55,7 +55,7 @@ use App\Components\Helper;
                                 <div class="form-group required-field text-left @error('name') is-invalid @enderror">
                                     <label for="state_id">{{ __('State') }}</label>
                                     <select class="form-control" id="state_id" name="state_id[]" multiple="multiple">
-                                        <option value="">Select State</option>
+                                    <option value="all">Select All</option> 
                                         
 
                                         @foreach ($states as $item)
@@ -97,7 +97,8 @@ use App\Components\Helper;
                                     <label for="state_id">{{ __('Filter') }}</label>
                                     <select id="filter" name="filter[]" multiple="multiple" class="form-control"
                                         required="">
-                                        <option value="">Select Filter</option>
+                                        <option value="all">Select All</option> 
+                                        
 
                                         @foreach ($filters as $item)
                                             @if ($template_details->filter_ids)
@@ -209,14 +210,54 @@ use App\Components\Helper;
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+
     <script>
-        $(document).ready(function() {
-            $('#filter').select2({
-                placeholder: 'Select Filter'
-            });
-            $('#state_id').select2({
-                placeholder: 'Select Filter'
-            });
+    $(document).ready(function() {
+        $('#filter, #state_id').select2({
+            placeholder: 'Select',
+            allowClear: true // This allows clearing the selection
         });
-    </script>
+
+        // Handle "Select All" option for State
+        $('#state_id').on('select2:select', function(e) {
+            if ($(this).val() != null && $(this).val().includes('all')) {
+                $(this).val([...$(this).find('option').not(':first').map(function() {
+                    return this.value;
+                })]).trigger('change');
+            }
+        });
+
+        $('#state_id').on('select2:unselect', function(e) {
+            if ($(this).val() != null && !$(this).val().includes('all')) {
+                // Check if "Select All" is still selected
+                if ($('#state_id option[value="all"]').is(':selected')) {
+                    // If "Select All" is still selected, don't reset the selection
+                    return;
+                }
+            }
+        }); 
+
+
+        $('#filter').on('select2:select', function(e) {
+            if ($(this).val() != null && $(this).val().includes('all')) {
+                $(this).val([...$(this).find('option').not(':first').map(function() {
+                    return this.value;
+                })]).trigger('change');
+            }
+        });
+
+        $('#filter').on('select2:unselect', function(e) {
+            if ($(this).val() != null && !$(this).val().includes('all')) {
+                // Check if "Select All" is still selected
+                if ($('#filter option[value="all"]').is(':selected')) {
+                    // If "Select All" is still selected, don't reset the selection
+                    return;
+                }
+            }
+        }); 
+
+ 
+    });
+</script>
+
 @endsection
