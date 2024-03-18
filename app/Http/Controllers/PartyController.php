@@ -199,6 +199,10 @@ class PartyController extends Controller
             $data['state_id'] = json_encode($request->state_id);
             $data['filter_ids'] = json_encode($request->filter);
 
+            $data['color_code'] = $request->color_code;
+            $data['designation_color_code'] = $request->designation_color_code;
+
+
             Template::create($data);
 
             return redirect('view-template' . '/' . $party_id)->with('success', 'Template created successfully.');
@@ -243,7 +247,9 @@ class PartyController extends Controller
 
             $data = [
                 'state_id' => json_encode($request->state_id),
-                'filter_ids' => json_encode($request->filter)
+                'filter_ids' => json_encode($request->filter),
+                'color_code' => $request->color_code,
+                'designation_color_code' => $request->designation_color_code,
             ];
 
             // Handle file upload

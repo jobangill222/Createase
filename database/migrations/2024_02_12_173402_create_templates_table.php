@@ -18,6 +18,10 @@ class CreateTemplatesTable extends Migration
 
             $table->integer('party_id')->nullable();
             $table->json('state_id')->nullable();
+
+            $table->string('color_code')->nullable();
+            $table->string('designation_color_code')->nullable();
+
             $table->string('background_image')->nullable();
             $table->json('filter_ids')->nullable();
             $table->string('deleted_at')->nullable();

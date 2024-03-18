@@ -128,6 +128,27 @@ use App\Components\Helper;
 
 
 
+                        <div class="row">
+                            <div class="col-md-6 col-6">
+                                <div class="form-group required-field text-left @error('name') is-invalid @enderror">
+                                    <label for="state_id">Color Code</label>
+                                    <input type="text" name="color_code" value="{{$template_details->color_code}}" class="form-control" placeholder="#FFFFFF">
+                                </div>
+                            </div>
+                        </div>
+    
+    
+                        <div class="row">
+                            <div class="col-md-6 col-6">
+                                <div class="form-group required-field text-left @error('name') is-invalid @enderror">
+                                    <label for="state_id">Designation Color code</label>
+                                    <input type="text" name="designation_color_code" value="{{$template_details->designation_color_code}}" class="form-control" placeholder="#FFFFFF">
+                                </div>
+                            </div>
+                        </div>
+
+
+
 
 
                         <div class="row">

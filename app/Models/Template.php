@@ -12,6 +12,10 @@ class Template extends Model
     protected $fillable = [
         'party_id',
         'state_id',
+
+        'color_code',
+        'designation_color_code',
+        
         'background_image',
         'filter_ids',
         'deleted_at',

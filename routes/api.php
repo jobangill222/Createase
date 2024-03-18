@@ -39,7 +39,7 @@ Route::group(['middleware' => ['user']], function () {
 
     Route::get('/delete-draft-image/{id}', [App\Http\Controllers\api\ProfileController::class, 'deleteDraftImage']);
 
-    Route::get('/get-party', [App\Http\Controllers\api\UserController::class, 'getParty']);
+    Route::post('/get-party', [App\Http\Controllers\api\UserController::class, 'getParty']);
     Route::post('/get-templates', [App\Http\Controllers\api\UserController::class, 'getTemplate']);
     Route::get('/get-state', [App\Http\Controllers\api\UserController::class, 'getState']);
     Route::get('/get-city/{state_id}', [App\Http\Controllers\api\UserController::class, 'getCity']);
