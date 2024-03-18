@@ -17,7 +17,10 @@
         </div>
 
         <div class="media-list">
-
+            
+            <div class="page-header-right" style="">
+                <a href="{{ url('delete-user').'/'.$user->id }}" class="btn btn-primary">{{ __('Delete User') }}</a>
+            </div>
 
             <div class="media">
                 <div class="media-body">

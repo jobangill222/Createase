@@ -7,6 +7,8 @@ use App\Components\Helper;
 use App\Constants\CommonConstants;
 use App\Constants\UserConstants;
 use App\Models\user;
+use App\Models\UserImage;
+use App\Models\UserLoginHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -243,4 +245,15 @@ class UserController extends Controller
         Auth::login($user, true);
         return redirect()->route('redirect');
     }
+
+
+
+    public function deleteUser(Request $request , $id){
+        User::where('id', $id)->delete();
+        UserImage::where('user_id', $id)->delete();
+        UserLoginHistory::where('user_id', $id)->delete();
+        return redirect('user')->with('success','User deleted successfully.');
+    }
+
+
 }

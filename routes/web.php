@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/user/login-as/{id}', [\App\Http\Controllers\UserController::class, 'loginAs'])->name('user.loginAs');
         Route::get('/user/mark-email-verified/{id}', [\App\Http\Controllers\UserController::class, 'markEmailVerified'])->name('user.markEmailVerified');
 
+        Route::get('/delete-user/{user_id}', [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('user.deleteUser');
+
+
         Route::resource('setting', \App\Http\Controllers\SettingController::class);
         Route::get('/setting/list/data-table', [\App\Http\Controllers\SettingController::class, 'dataTable'])->name('setting.dataTable');
 
