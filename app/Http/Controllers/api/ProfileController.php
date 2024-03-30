@@ -92,14 +92,15 @@ class ProfileController extends Controller
                         UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
                     }
                 }
-
-                $image_data = [
-                    'user_id' => $user->id,
-                    'image' => $imageName = basename($user->profile_pic),
-                    'is_active' => 1
-                ];
-                UserImage::create($image_data);
+ 
             }
+
+            $image_data = [
+                'user_id' => $user->id,
+                'image' => $imageName = basename($user->profile_pic),
+                'is_active' => 1
+            ];
+            UserImage::create($image_data);
         }
 
         User::where('id', $user->id)->update($data);
