@@ -93,12 +93,12 @@ class ProfileController extends Controller
                     }
                 }
 
-                $image_data = [
-                    'user_id' => $user->id,
-                    'image' => basename($user->profile_pic),
-                    'is_active' => 0
-                ];
-                UserImage::create($image_data);
+                // $image_data = [
+                //     'user_id' => $user->id,
+                //     'image' => basename($user->profile_pic),
+                //     'is_active' => 0
+                // ];
+                // UserImage::create($image_data);
             }
             
             $image_data = [
