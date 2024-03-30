@@ -81,6 +81,7 @@ class ProfileController extends Controller
             // Save the image path or other relevant information to the database
             $data['profile_pic'] = $imageName;
             
+            UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
             if($user->profile_pic){
 
 
@@ -89,18 +90,23 @@ class ProfileController extends Controller
                     $image = UserImage::where('user_id', $user->id)->first();
                     if ($image) {
                         $image->delete();
-                        UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
                     }
                 }
- 
-            }
 
-            $image_data = [
-                'user_id' => $user->id,
-                'image' => $imageName = basename($user->profile_pic),
-                'is_active' => 1
-            ];
-            UserImage::create($image_data);
+                $image_data = [
+                    'user_id' => $user->id,
+                    'image' => $imageName = basename($user->profile_pic),
+                    'is_active' => 1
+                ];
+                UserImage::create($image_data);
+            }else{
+                $image_data = [
+                    'user_id' => $user->id,
+                    'image' => $imageName ,
+                    'is_active' => 1
+                ];
+                UserImage::create($image_data);
+            }
         }
 
         User::where('id', $user->id)->update($data);
