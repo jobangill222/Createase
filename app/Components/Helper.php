@@ -119,7 +119,10 @@ class Helper
                                 case 'delete':
                                     $icon = 'las la-trash';
                                     break;
-                            }
+                                case 'payment':
+                                    $icon = 'fa fa-money';
+                                    break;
+                        }
                         }
 
                         if (array_key_exists('extra', $link)) {

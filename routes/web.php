@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
 
+        Route::get('/oayment-details/{user_id}', [\App\Http\Controllers\Api\PaymentController::class, 'paymentDetails'])->name('payment.show');
 
 
     });

@@ -216,6 +216,8 @@ class UserController extends Controller
                     return Helper::getActionButtons([
                         // 'Login' => ['url' => route('user.loginAs', $row->id), 'icon' => 'las la-sign-in-alt'],
                         'view' => ['url' => route('user.show', $row->id)],
+                        'payment' => ['url' => route('payment.show', $row->id)],
+
                         // 'edit' => ['url' => route('user.edit', $row->id)],
                         // 'markActive' => ['url' => route('user.markEmailVerified', $row->id), 'icon' => 'la la-check', 'visible' => ($row->email_verified_at == null)],
                     ]);

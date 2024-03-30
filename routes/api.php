@@ -48,5 +48,11 @@ Route::group(['middleware' => ['user']], function () {
 
     Route::get('/get-filter-list', [App\Http\Controllers\api\UserController::class, 'getFilterList']);
 
+    Route::post('/payment', [App\Http\Controllers\api\PaymentController::class, 'payment']);
 
+
+    Route::get('/set-draft-image-as-profile/{image_id}', [App\Http\Controllers\api\ProfileController::class, 'setDraftImageAsProfile']);
+
+
+    
 });

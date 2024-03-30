@@ -80,11 +80,27 @@ class ProfileController extends Controller
             $image->storeAs('public/uploads/users', $imageName); // Store the image in the storage directory
             // Save the image path or other relevant information to the database
             $data['profile_pic'] = $imageName;
+            
+            if($user->profile_pic){
+
+
+                $users_existing_image_count = UserImage::where('user_id', $user->id)->count();
+                if ($users_existing_image_count == 6) {
+                    $image = UserImage::where('user_id', $user->id)->first();
+                    if ($image) {
+                        $image->delete();
+                        UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
+                    }
+                }
+
+                $image_data = [
+                    'user_id' => $user->id,
+                    'image' => $imageName = basename($user->profile_pic),
+                    'is_active' => 1
+                ];
+                UserImage::create($image_data);
+            }
         }
-
-        // return $data;
-
-
 
         User::where('id', $user->id)->update($data);
 
@@ -135,6 +151,22 @@ class ProfileController extends Controller
             'status' => 'success',
             'message' => 'Draft image deleted successfully.',
         ]);
+    }
+
+
+    public function setDraftImageAsProfile(Request $request, $image_id){
+
+        $user = auth()->user();
+        
+        UserImage::where('user_id', $user->id)->update(['is_active' => 0]);
+
+        UserImage::where('id', $image_id)->update(['is_active' => 1]);
+
+        $selected_image_detail = UserImage::where('id', $image_id)->first();
+
+        User::where('id' , $user->id)->update(['profile_pic' => basename($selected_image_detail->image)]);
+
+        return response()->json(['status' => 'success' , 'message' => 'Image changed successfully.']);
     }
 
 
