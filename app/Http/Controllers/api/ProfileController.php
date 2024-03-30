@@ -95,7 +95,7 @@ class ProfileController extends Controller
 
                 $image_data = [
                     'user_id' => $user->id,
-                    'image' => $imageName = basename($user->profile_pic),
+                    'image' => basename($user->profile_pic),
                     'is_active' => 1
                 ];
                 UserImage::create($image_data);
