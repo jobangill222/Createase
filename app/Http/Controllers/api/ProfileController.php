@@ -15,7 +15,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $data = User::where('id', $user->id)->with(['userImages', 'stateDetails', 'cityDetails'])->first();
+        $data = User::where('id', $user->id)->with(['userImages', 'stateDetails', 'cityDetails' , 'paymentDetails'])->first();
         return response()->json([
             'status' => 'success',
             'message' => 'User details get successfully.',

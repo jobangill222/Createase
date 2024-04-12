@@ -208,4 +208,11 @@ class User extends BaseModel implements
     //     }
     // }
 
+
+    public function paymentDetails()
+    {
+        return $this->hasMany(Payment::class, 'user_id')->orderBy('id' , 'desc');
+    }
+
+
 }
